@@ -9,7 +9,7 @@
             fetch('/verification-status')
                 .then(response => response.json())
                 .then(data => {
-                    if (data === true) {
+                    if (data == true) {
                         window.location.href = '/presentation-view';
                     } else {
                         setTimeout(pollForVerification, 2000); // Poll every 2 seconds
