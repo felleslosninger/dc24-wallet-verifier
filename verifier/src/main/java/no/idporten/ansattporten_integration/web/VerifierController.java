@@ -19,6 +19,8 @@ import reactor.core.publisher.Mono;
 public class VerifierController {
 
     boolean hasReceivedVP = false;
+
+    //Billig løsning for å lagre claims og verified status, bør se på å implementere WebSession
     String presClaims;
     boolean presVerified;
 
@@ -32,9 +34,16 @@ public class VerifierController {
 
     @GetMapping("/presentation-view")
     public String presentation(Model model, WebSession session) {
+
+        logger.info("challengeId: " + session.getAttribute("challengeId"));
+        logger.info("claims: " + session.getAttribute("claims"));
+        logger.info("verified: " + session.getAttribute("verified"));
+        logger.info("holder: " + session.getAttribute("holder"));
+
+
         model.addAttribute("challengeId", session.getAttribute("challengeId"));
-        model.addAttribute("claims", session.getAttribute("claims"));
-        model.addAttribute("verified", session.getAttribute("verified"));
+        model.addAttribute("claims", presClaims);
+        model.addAttribute("verified", presVerified);
         model.addAttribute("holder", session.getAttribute("holder"));
         return "presentation-view";
     }  
@@ -53,10 +62,10 @@ public class VerifierController {
             logger.info("Session ID: " + session.getId());
             String responseData = "Hello from verifier";
             
-            model.addAttribute("challengeId", verifiablePresentation.getChallengeId());
-            model.addAttribute("claims", verifiablePresentation.getClaims());
-            model.addAttribute("verified", verifiablePresentation.getVerified());
-            model.addAttribute("holder", verifiablePresentation.getHolder());
+            session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
+            session.getAttributes().put("claims", verifiablePresentation.getClaims());
+            session.getAttributes().put("verified", verifiablePresentation.getVerified());
+            session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
             presClaims = verifiablePresentation.getClaims().toString();
             presVerified = verifiablePresentation.getVerified(); 
