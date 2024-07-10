@@ -55,6 +55,11 @@ public class VerifierController {
         return verified;
     }
 
+    @GetMapping("/qr-code")
+    public String qrCode() {
+        return "qr-code";
+    }
+
     @PostMapping("/callback")
     public ResponseEntity<?> receivePresentation(WebSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
         try{

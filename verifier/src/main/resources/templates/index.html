@@ -4,26 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        function pollForVerification() {
-            fetch('/verification-status')
-                .then(response => response.json())
-                .then(data => {
-                    if (data == true) {
-                        window.location.href = '/presentation-view';
-                    } else {
-                        setTimeout(pollForVerification, 2000); // Poll every 2 seconds
-                    }
-                });
-        }
-
-        // Start polling when the page loads
-        document.addEventListener("DOMContentLoaded", function() {
-            pollForVerification();
-        });
-    </script>
 </head>
 <body>
-    <h1>Scan QR-kode</h1>
+    <h1>FUNKSJONALITET FOR Å VELGE HVILKEN DATA SOM SKAL DELES</h1>
+    <p><a href="/qr-code">Gå til QR-kode!</a></p>
 </body>
 </html>
