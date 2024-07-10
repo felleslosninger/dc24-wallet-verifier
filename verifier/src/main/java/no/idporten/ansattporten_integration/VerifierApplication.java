@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AnsattportenIntegrationApplication {
+public class VerifierApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AnsattportenIntegrationApplication.class, args);
+		SpringApplication.run(VerifierApplication.class, args);
 	}
 
 }
