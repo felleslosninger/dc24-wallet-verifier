@@ -1,29 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        function pollForVerification() {
-            fetch('/verification-status')
-                .then(response => response.json())
-                .then(data => {
-                    if (data == true) {
-                        window.location.href = '/presentation-view';
-                    } else {
-                        setTimeout(pollForVerification, 2000); // Poll every 2 seconds
-                    }
-                });
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background-color: hsl(0, 0%, 100%);
+		}
+		h1 {
+			color: #699460;
+			font-size: 64px;
+			text-align: center;
+		}
+		.container {
+            margin-top: 80px; /* Juster denne verdien for å flytte den nedover */
+			width: 100%;
+			height: 100%;
+			display: flex;
+			position: fixed;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			left: 0;
+			top: 0;
+			overflow: auto;
+			font-size: 10vw;
+		}
+		.container > div {
+			margin: 30px;
+		}
+		#loading-dot {
+			width: 120px;
+			height: 60px;
+			background-image: radial-gradient(circle, #699460 50%, transparent 50%), radial-gradient(circle, #699460 50%, transparent 50%), radial-gradient(circle, #699460 50%, transparent 50%);
+			background-size: 30px 30px;
+			background-position: 0% 50%, 50% 50%, 100% 50%;
+			background-repeat: no-repeat;
+			animation: loading 1s infinite;
+		}
+		@keyframes loading {
+			0%, 33.34%, 66.68%, 100% {
+				background-position: 0% 50%, 50% 50%, 100% 50%;
+			}
+			16.67% {
+				background-position: 0% 20%, 50% 50%, 100% 50%;
+			}
+			50.01% {
+				background-position: 0% 50%, 50% 20%, 100% 50%;
+			}
+			83.35% {
+				background-position: 0% 50%, 50% 50%, 100% 20%;
+			}
+		}
+	</style>
+	<script>
+		function pollForVerification() {
+			fetch('/verification-status')
+				.then(response => response.json())
+				.then(data => {
+					if (data == true) {
+						window.location.href = '/presentation-view';
+					} else {
+						setTimeout(pollForVerification, 2000); // Poll every 2 seconds
+					}
+				});
+		}
 
-        // Start polling when the page loads
-        document.addEventListener("DOMContentLoaded", function() {
-            pollForVerification();
-        });
-    </script>
+		document.addEventListener("DOMContentLoaded", function() {
+			pollForVerification();
+		});
+	</script>
 </head>
 <body>
-    <h1>Scan QR-kode</h1>
+	<h1>Scan QR-kode</h1>
+	<div class="container">
+		<div id="loading-dot"></div>
+	</div>
 </body>
 </html>
