@@ -62,7 +62,10 @@
 	<div class="container">
 		<h1>Verifiserte Attributter</h1>
 		<div class="attribute">
-			<p><strong>Claims:</strong> <span th:text="${claims}"></span></p>
+			<p><strong>Claims:</strong> 
+				<div th:each="entry : ${claims}">
+					<p><strong th:text="${entry.key}"></strong>: <span th:text="${entry.value}"></span></p>
+				</div>
 		</div>
 		<div class="attribute">
 			<p><strong>Verified:</strong> <span th:text="${verified}"></span></p>

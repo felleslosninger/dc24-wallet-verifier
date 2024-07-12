@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.WebSession;
 
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
+import no.idporten.ansattporten_integration.model.VerifiablePresentation.Claims;
 import reactor.core.publisher.Mono;
 
 @Controller
@@ -21,7 +22,7 @@ public class VerifierController {
     boolean hasReceivedVP = false;
 
     //Billig løsning for å lagre claims og verified status, bør se på å implementere WebSession
-    String presClaims;
+    Claims presClaims;
     boolean presVerified;
 
     private static final Logger logger = LoggerFactory.getLogger(VerifierController.class);
@@ -72,7 +73,7 @@ public class VerifierController {
             session.getAttributes().put("verified", verifiablePresentation.getVerified());
             session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
-            presClaims = verifiablePresentation.getClaims().toString();
+            presClaims = verifiablePresentation.getClaims();
             presVerified = verifiablePresentation.getVerified(); 
 
             // Indicate that the presentation was received successfully

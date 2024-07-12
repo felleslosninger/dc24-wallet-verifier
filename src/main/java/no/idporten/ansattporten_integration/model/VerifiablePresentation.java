@@ -1,6 +1,11 @@
 package no.idporten.ansattporten_integration.model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class VerifiablePresentation {
@@ -9,7 +14,7 @@ public class VerifiablePresentation {
     private String challengeId;
 
     @JsonProperty("claims")
-    private Map<String, String> claims;
+    private Claims claims;
 
     @JsonProperty("verified")
     private boolean verified;
@@ -24,7 +29,7 @@ public class VerifiablePresentation {
         this.challengeId = challengeId;
     }
 
-    public void setClaims(Map<String, String> claims) {
+    public void setClaims(Claims claims) {
         this.claims = claims;
     }
 
@@ -42,7 +47,7 @@ public class VerifiablePresentation {
         return challengeId;
     }
 
-    public Map<String, String> getClaims() {
+    public Claims getClaims() {
         return claims;
     }
 
@@ -54,4 +59,22 @@ public class VerifiablePresentation {
         return holder;
     }
 
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class Claims {
+
+        private Map<String, Object> claims = new HashMap<>();
+
+        @JsonAnyGetter
+        public Map<String, Object> getClaims() {
+            return claims;
+        }
+
+        @JsonAnySetter
+        public void setClaim(String name, Object value) {
+            this.claims.put(name, value);
+        }
+    }
 }
+
+
