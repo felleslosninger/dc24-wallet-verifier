@@ -16,14 +16,16 @@ import no.idporten.ansattporten_integration.model.VerifiablePresentation;
 import no.idporten.ansattporten_integration.model.VerifiablePresentation.Claims;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @Controller
 public class VerifierController {
 
     boolean hasReceivedVP = false;
 
     //Billig løsning for å lagre claims og verified status, bør se på å implementere WebSession
-    Claims presClaims;
-    boolean presVerified;
+    public Map<String,String> presClaims;
+    public boolean presVerified;
 
     private static final Logger logger = LoggerFactory.getLogger(VerifierController.class);
 
@@ -73,8 +75,11 @@ public class VerifierController {
             session.getAttributes().put("verified", verifiablePresentation.getVerified());
             session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
-            presClaims = verifiablePresentation.getClaims();
+            presClaims = verifiablePresentation.getClaims().getClaims();
             presVerified = verifiablePresentation.getVerified(); 
+
+            logger.info("presClaims: " + presClaims);
+            logger.info("presVerified: " + presVerified);
 
             // Indicate that the presentation was received successfully
             session.getAttributes().put("presentationReceived", true);

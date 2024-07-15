@@ -63,15 +63,15 @@ public class VerifiablePresentation {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Claims {
 
-        private Map<String, Object> claims = new HashMap<>();
+        private Map<String, String> claims = new HashMap<>();
 
         @JsonAnyGetter
-        public Map<String, Object> getClaims() {
+        public Map<String, String> getClaims() {
             return claims;
         }
 
         @JsonAnySetter
-        public void setClaim(String name, Object value) {
+        public void setClaim(String name, String value) {
             this.claims.put(name, value);
         }
     }
