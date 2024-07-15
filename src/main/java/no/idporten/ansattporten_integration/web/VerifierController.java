@@ -1,5 +1,6 @@
 package no.idporten.ansattporten_integration.web;
 
+import no.idporten.ansattporten_integration.service.RequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +16,24 @@ import org.springframework.web.server.WebSession;
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
+
 @Controller
 public class VerifierController {
 
     boolean hasReceivedVP = false;
+    private final RequestService requestService;
 
     //Billig løsning for å lagre claims og verified status, bør se på å implementere WebSession
     String presClaims;
     boolean presVerified;
 
     private static final Logger logger = LoggerFactory.getLogger(VerifierController.class);
+
+    // Needed to initialize the requestService object above
+    public VerifierController(RequestService requestService) {
+        this.requestService = requestService;
+    }
 
     @GetMapping("/")
     public String index(WebSession session){
@@ -56,7 +65,8 @@ public class VerifierController {
     }
 
     @GetMapping("/qr-code")
-    public String qrCode() {
+    public String qrCode() throws IOException {
+        requestService.createPresentation();
         return "qr-code";
     }
 
