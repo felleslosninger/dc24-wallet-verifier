@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 public class PresentationTemplate {
     static String requestURL = "/v2/credentials/web-semantic/presentations/templates";
-    String uniqueTemplateName = "Working-presentation-3";
+    static String uniqueTemplateName = "Working-presentation-4";
 
     public static String CreatePresentationTemplate(String issuerDID, String tenantURL, String domain, String token) {
         try {
