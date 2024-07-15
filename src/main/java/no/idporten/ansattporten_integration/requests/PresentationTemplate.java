@@ -15,6 +15,7 @@ import java.util.Map;
 @Slf4j
 public class PresentationTemplate {
     static String requestURL = "/v2/credentials/web-semantic/presentations/templates";
+    String uniqueTemplateName = "Working-presentation-3";
 
     public static String CreatePresentationTemplate(String issuerDID, String tenantURL, String domain, String token) {
         try {
@@ -65,7 +66,7 @@ public class PresentationTemplate {
 
             Map<String, Object> map = new HashMap<>();
             map.put("domain", domain);
-            map.put("name", "Working-presentation-1");
+            map.put("name", uniqueTemplateName);
             map.put("query", queryList);
 
             // Convert to json and send the request
@@ -76,7 +77,6 @@ public class PresentationTemplate {
             String jsonResponse = sendRequest.sendRequest(jsonString, tenantURL + requestURL, token);
 
             JSONObject jsonObject = new JSONObject(jsonResponse); // Convert to json to extract access_token
-            System.out.println("\n\n\n\n\n\n"+ jsonObject);
             return(jsonObject.getString("id"));
         } catch (Exception e) {
             e.printStackTrace();
