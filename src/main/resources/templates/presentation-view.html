@@ -42,6 +42,10 @@
 			transform: translateY(-5px);
 			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 		}
+		.attribute-header {
+            font-size: 20px; /* Make the Claims header text larger */
+			text-align: center;
+        }
 		.action-button {
 			display: block;
 			width: max-content;
@@ -62,7 +66,7 @@
 	<div class="container">
 		<h1>Verifiserte Attributter</h1>
 		<div class="attribute">
-			<p><strong>Claims:</strong> 
+			<p class="attribute-header"><strong>Claims</strong> 
 				<div th:each="entry : ${claims}">
 					<p><strong th:text="${entry.key}"></strong>: <span th:text="${entry.value}"></span></p>
 				</div>
