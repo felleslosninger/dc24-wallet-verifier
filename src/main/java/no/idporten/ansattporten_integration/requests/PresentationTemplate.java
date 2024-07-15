@@ -10,12 +10,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @Slf4j
 public class PresentationTemplate {
     static String requestURL = "/v2/credentials/web-semantic/presentations/templates";
-    static String uniqueTemplateName = "Working-presentation-4";
+
+    static LocalDateTime currentDateTime = LocalDateTime.now();
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    static String timestamp = currentDateTime.format(formatter);
+    static String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
 
     public static String CreatePresentationTemplate(String issuerDID, String tenantURL, String domain, String token) {
         try {

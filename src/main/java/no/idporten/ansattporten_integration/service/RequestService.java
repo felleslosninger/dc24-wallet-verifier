@@ -48,15 +48,16 @@ public class RequestService {
     }
 
     public void createPresentation() throws IOException {
-        File file = new File("src/main/resources/static/frame.png");
+        String path = "src/main/resources/static/qrCodes/selectiveDisclosure.png";
+        File file = new File(path);
 
-        // Only generates a new qr code if it can't find a previous one
+        // Only generates a new qr code if it can't find an existing one
         if (!file.exists()) {
             String presentationTemplateId = PresentationTemplate.CreatePresentationTemplate(issuerDID, tenantURL, domain, getJwt());
             String presentationReq = PresentationRequest.CreatePresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
 
             try {
-                GenerateQRCode.GenerateQRCodeImage(presentationReq, 300, 300, "src/main/resources/static/frame.png");
+                GenerateQRCode.GenerateQRCodeImage(presentationReq, 300, 300, path);
             } catch (WriterException | IOException e) {
                 System.err.println("Error occurred while generating QR Code: " + e.getMessage());
             }
