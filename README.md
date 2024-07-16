@@ -1,14 +1,12 @@
 # demo-ansattporten-integration
-This is a very simple application that demonstrates an ansattporten integration, including log in and selecting a representation on behalf of a company.
-  
-  
+This is a simple application that demonstrates an how an verifier would be able to request and recieve the credential of a user, using the MATTR API.
+
+The application creates a Request Template based on data required to request a credential issued by our [Issuer](https://github.com/felleslosninger/dc24-eu-wallet)
   
 ## To run application
-Set Environment variable clientSecret to the ansattporten client secret.  
-If needed, update your client information in the application profile.
+Update the .env.example file with secrets specified there, and then rename it to .env
 
-If you're testing this, and don't have an ansattporten client, please contact digdir to enquire for one,  
-you can find more details in the [Ansattporten integration guide](https://docs.digdir.no/docs/idporten/oidc/ansattporten_guide)
+The MATTR secrets can be obtained by requesting access to their API and following their guide for setting up a verifier.
 
 ## Web stack alternatives
 The application on main branch uses WebFlux and Netty, creating a reactive stack, through spring-boot-starter-webflux.  
