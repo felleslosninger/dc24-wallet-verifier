@@ -48,7 +48,7 @@ public class RequestService {
     }
 
     public void createPresentation() throws IOException {
-        String path = "src/main/resources/static/qrCodes/selectiveDisclosure.png";
+        String path = "src/main/resources/static/qrCodes/selective-disclosure.png";
         File file = new File(path);
 
         // Only generates a new qr code if it can't find an existing one

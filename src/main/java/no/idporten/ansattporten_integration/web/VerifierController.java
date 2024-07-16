@@ -43,10 +43,10 @@ public class VerifierController {
     @GetMapping("/presentation-view")
     public String presentation(Model model, WebSession session) {
 
-        logger.info("challengeId: " + session.getAttribute("challengeId"));
-        logger.info("claims: " + session.getAttribute("claims"));
-        logger.info("verified: " + session.getAttribute("verified"));
-        logger.info("holder: " + session.getAttribute("holder"));
+        // logger.info("challengeId: " + session.getAttribute("challengeId"));
+        // logger.info("claims: " + session.getAttribute("claims"));
+        // logger.info("verified: " + session.getAttribute("verified"));
+        // logger.info("holder: " + session.getAttribute("holder"));
 
 
         model.addAttribute("challengeId", session.getAttribute("challengeId"));
@@ -73,7 +73,7 @@ public class VerifierController {
     public ResponseEntity<?> receivePresentation(WebSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
         try{
             logger.info("Received presentation callback");
-            logger.info("Session ID: " + session.getId());
+            //logger.info("Session ID: " + session.getId());
             String responseData = "Hello from verifier";
             
             session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
@@ -91,7 +91,7 @@ public class VerifierController {
             session.getAttributes().put("presentationReceived", true);
             hasReceivedVP = true;
             logger.info(session.getAttribute("presentationReceived").toString());
-            return ResponseEntity.ok(model);
+            return ResponseEntity.ok(responseData);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());

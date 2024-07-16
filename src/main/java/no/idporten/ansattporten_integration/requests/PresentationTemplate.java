@@ -27,7 +27,7 @@ public class PresentationTemplate {
         try {
             Map<String, Object> trustedIssuer = new HashMap<>();
             trustedIssuer.put("issuer", issuerDID);
-            trustedIssuer.put("required", true);
+            trustedIssuer.put("required", false);
 
             List<Map<String, Object>> trustedIssuerList = new ArrayList<>();
             trustedIssuerList.add(trustedIssuer);
