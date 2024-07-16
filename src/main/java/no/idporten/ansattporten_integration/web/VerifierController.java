@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.WebSession;
 
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
+import no.idporten.ansattporten_integration.model.VerifiablePresentation.Claims;
+import reactor.core.publisher.Mono;
+
 import java.util.Map;
 
 import java.io.IOException;
