@@ -2,7 +2,7 @@ spring:
     application:
         name: ansattporten-integration
     session:
-        store-type: none
+        store-type: redis
     security:
         oauth2:
             client:
@@ -18,8 +18,11 @@ spring:
                 provider:
                     ansattporten:
                         issuer-uri: https://test.ansattporten.no
+    redis:
+        host: localhost
+        port: 6379
 server:
-    port: 2000
+    port: 2001
     servlet:
         session:
             timeout: 30m

@@ -1,0 +1,13 @@
+# flyctl launch added from .gitignore
+**\target
+
+### IntelliJ IDEA ###
+**\.idea
+**\*.iws
+**\*.iml
+**\*.ipr
+**\*.env
+
+### VS Code ###
+**\.vscode
+fly.toml

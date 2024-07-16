@@ -1,0 +1,31 @@
+# fly.toml app configuration file generated for dc24-wallet-verifier-winter-resonance-2705 on 2024-07-15T12:35:50+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'dc24-wallet-verifier'
+primary_region = 'ams'
+
+[build]
+  dockerfile = '/Dockerfile.jvm'
+
+[http_service]
+  internal_port = 2001
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0 
+  processes = ['app']
+
+[env]
+  MATTR_TENANT_URL=
+  MATTR_CLIENT_ID=
+  MATTR_CLIENT_SECRET=
+  MATTR_DOMAIN=
+  MATTR_ISSUER_DID=
+  MATTR_VERIFIER_DID=
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
