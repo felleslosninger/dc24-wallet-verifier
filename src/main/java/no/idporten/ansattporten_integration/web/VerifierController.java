@@ -39,17 +39,19 @@ public class VerifierController {
 
     @GetMapping("/")
     public String index(WebSession session){
-        logger.info("Session ID: " + session.getId());
+        logger.info("Session ID in index: " + session.getId());
         return "index";
     }
 
     @GetMapping("/presentation-view")
     public String presentation(Model model, WebSession session) {
 
-        // logger.info("challengeId: " + session.getAttribute("challengeId"));
-        // logger.info("claims: " + session.getAttribute("claims"));
-        // logger.info("verified: " + session.getAttribute("verified"));
-        // logger.info("holder: " + session.getAttribute("holder"));
+        logger.info("Session ID in /presentation-view: " + session.getId());
+
+        logger.info("challengeId: " + session.getAttribute("challengeId"));
+        logger.info("claims: " + session.getAttribute("claims"));
+        logger.info("verified: " + session.getAttribute("verified"));
+        logger.info("holder: " + session.getAttribute("holder"));
 
 
         model.addAttribute("challengeId", session.getAttribute("challengeId"));
@@ -73,14 +75,14 @@ public class VerifierController {
     }
 
     @PostMapping("/callback")
-    public ResponseEntity<?> receivePresentation(WebSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
+    public Mono<ResponseEntity<?>> receivePresentation(WebSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
         try{
             logger.info("Received presentation callback");
-            //logger.info("Session ID: " + session.getId());
+            logger.info("Session ID in /callback: " + session.getId());
             String responseData = "Hello from verifier";
             
             session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
-            session.getAttributes().put("claims", verifiablePresentation.getClaims());
+            session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaims());
             session.getAttributes().put("verified", verifiablePresentation.getVerified());
             session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
@@ -94,10 +96,10 @@ public class VerifierController {
             session.getAttributes().put("presentationReceived", true);
             hasReceivedVP = true;
             logger.info(session.getAttribute("presentationReceived").toString());
-            return ResponseEntity.ok(responseData);
+            return Mono.just(ResponseEntity.ok(responseData));
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            return Mono.just(ResponseEntity.badRequest().body("Error: " + e.getMessage()));
         }
     }
 }
