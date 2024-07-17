@@ -20,7 +20,7 @@ The MATTR secrets can be obtained by requesting access to their API and followin
 - Update the `fly.toml.example` file with secrets specified there and give your app a fitting name, e.g "johns-verifier". Make sure that someone else hasn't deployed an app with the same name to avoid that you overrun someone elses deployed app. (This is because the DC24 team is using the same organization sub)
 - Before you deploy your app to fly.io you have to install Docker. Make sure that the Docker application is up and running and run the following command in your terminal from the directory to create a Docker image:
 `docker build -f Dockerfile.jvm -t my-spring-boot-app .`
-- You can now ship your Docker image launch your app by running `fly launch`from the terminal
+- You can now ship your Docker image launch your app by running `fly launch` from the terminal
 - You will be asked if you want to use the existing fly.toml file, say yes.
 - You will also be asked if you want to tweak the default settings, say yes. You will then be redirected to a settings page, here you must make sure that the organization you're using is "dc24" -> "Confirm Settings"
 - You can now visit your by following the link printed in the terminal!
