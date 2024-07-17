@@ -80,7 +80,7 @@ public class VerifierController {
             String responseData = "Hello from verifier";
             
             session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
-            session.getAttributes().put("claims", verifiablePresentation.getClaims());
+            session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaims());
             session.getAttributes().put("verified", verifiablePresentation.getVerified());
             session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
