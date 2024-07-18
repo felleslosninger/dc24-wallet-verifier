@@ -52,7 +52,7 @@ public class RequestService {
 
         // Only generates a new qr code if it can't find an existing one
         if (!file.exists()) {
-            String presentationTemplateId = PresentationTemplate.CreatePresentationTemplate(issuerDID, tenantURL, domain, getJwt());
+            String presentationTemplateId = PresentationTemplate.createPresentationTemplate(issuerDID, tenantURL, domain, getJwt());
             String presentationReq = PresentationRequest.createPresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
 
             try {

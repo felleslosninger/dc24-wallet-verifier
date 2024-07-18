@@ -26,6 +26,11 @@ public class PresentationTemplate {
     static String timestamp = currentDateTime.format(formatter);
     static String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
 
+    // Private constructor to hide the public one.
+    private PresentationTemplate () {
+
+    }
+
     /**
      * Creates a presentation template with the given parameters.
      *
@@ -35,7 +40,7 @@ public class PresentationTemplate {
      * @param token the authentication token
      * @return the ID of the created presentation template, or an empty String if an error occurs
      */
-    public static String CreatePresentationTemplate(String issuerDID, String tenantURL, String domain, String token) {
+    public static String createPresentationTemplate(String issuerDID, String tenantURL, String domain, String token) {
         try {
             // Create a map for the trusted issuer details
             Map<String, Object> trustedIssuer = new HashMap<>();
@@ -105,7 +110,7 @@ public class PresentationTemplate {
             JSONObject jsonObject = new JSONObject(jsonResponse); // Convert to json to extract access_token
             return(jsonObject.getString("id"));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("An error occurred while creating a new presentation template", e);
             return "";
         }
     }
