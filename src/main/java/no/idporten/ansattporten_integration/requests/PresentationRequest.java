@@ -17,6 +17,11 @@ import java.util.Map;
 public class PresentationRequest {
     static String requestURL = "/v2/credentials/web-semantic/presentations/requests";
 
+    // Private constructor to hide the public one.
+    private PresentationRequest () {
+
+    }
+
     /**
      * Creates a presentation request with the given parameters.
      *
@@ -26,7 +31,7 @@ public class PresentationRequest {
      * @param token the authentication token
      * @return the didcommUri from the response, or an empty String if an error occurs
      */
-    public static String CreatePresentationRequest(String verifierDID, String tenantURL, String templateID, String token){
+    public static String createPresentationRequest(String verifierDID, String tenantURL, String templateID, String token){
         try{
             // Create a map to hold the request parameters
             Map<String, Object> map = new HashMap<>();
@@ -48,7 +53,7 @@ public class PresentationRequest {
             JSONObject jsonObject = new JSONObject(jsonResponse); // Convert to json to extract access_token
             return(jsonObject.getString("didcommUri"));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error creating presentation request", e);
             return "";
         }
     }

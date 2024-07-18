@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Date;
 
 
@@ -54,7 +53,7 @@ public class RequestService {
         // Only generates a new qr code if it can't find an existing one
         if (!file.exists()) {
             String presentationTemplateId = PresentationTemplate.CreatePresentationTemplate(issuerDID, tenantURL, domain, getJwt());
-            String presentationReq = PresentationRequest.CreatePresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
+            String presentationReq = PresentationRequest.createPresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
 
             try {
                 GenerateQRCode.GenerateQRCodeImage(presentationReq, 300, 300, path);
