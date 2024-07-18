@@ -55,7 +55,7 @@ public class VerifierController {
 
 
         model.addAttribute("challengeId", session.getAttribute("challengeId"));
-        model.addAttribute("claims", presClaims);
+        model.addAttribute("claims", session.getAttribute("claims"));
         model.addAttribute("verified", presVerified);
         model.addAttribute("holder", session.getAttribute("holder"));
         return "presentation-view";
