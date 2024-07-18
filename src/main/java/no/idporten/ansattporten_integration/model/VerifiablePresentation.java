@@ -8,6 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents a verifiable presentation containing claims and metadata
+ * about the verification status and holder information.
+ */
 public class VerifiablePresentation {
 
     @JsonProperty("challengeId")
@@ -60,16 +64,30 @@ public class VerifiablePresentation {
     }
 
 
+    /**
+     * Represents the claims associated with a verifiable presentation.
+     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Claims {
 
         private Map<String, String> claims = new HashMap<>();
 
+        /**
+         * Gets all claims as a map.
+         *
+         * @return a map of claims where the key is the claim name and the value is the claim value
+         */
         @JsonAnyGetter
         public Map<String, String> getClaims() {
             return claims;
         }
 
+        /**
+         * Sets a claim with the specified name and value.
+         *
+         * @param name the name of the claim
+         * @param value the value of the claim
+         */
         @JsonAnySetter
         public void setClaim(String name, String value) {
             this.claims.put(name, value);
