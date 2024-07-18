@@ -10,7 +10,7 @@ The requested claims in the `Request Template` is based on the claims our [Issue
 For details on hosting the verifier on `fly.io`, see [our explanation](https://github.com/felleslosninger/dc24-wallet-verifier/?tab=readme-ov-file#flyio-setup) as well as their [official documentation](https://fly.io/docs/getting-started/).
   
 ## To run application
-Update the `.env.example` file with secrets specified there, and then rename it to `.env`.
+Copye the `.env.example` file, and then rename it to `.env`. Change the secrets in the `.env` file to your values.
 
 The MATTR secrets can be obtained by requesting access to their API and following their [guide](https://learn.mattr.global/guides/) for setting up a verifier, as well as their [API documentation](https://learn.mattr.global/api-reference/).
 
