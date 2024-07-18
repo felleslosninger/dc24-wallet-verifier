@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/qr.css}"/>
     <title>qrCode</title>
+    <!--
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            justify-content: senter;
             align-items: center;
             height: 100vh;
             background-color: hsl(0, 0%, 100%);
@@ -65,7 +67,7 @@
             cursor: pointer;
             font-size: 14px;
         }
-    </style>
+    </style> -->
     <script>
         function pollForVerification() {
             fetch('/verification-status')
