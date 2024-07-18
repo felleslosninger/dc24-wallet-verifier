@@ -1,1 +1,74 @@
-/* CSS fil */
+/* Style for index */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: hsl(0, 0%, 100%);
+    transition: background-color 0.3s, color 0.3s;
+}
+h1 {
+    color: #699460;
+    font-size: 3em;
+    text-align: center;
+    margin: 0.5em 0;
+}
+p {
+    text-align: center;
+    margin: 1em 0;
+}
+a {
+    display: inline-block;
+    background-color: #699460; /* Enkel bakgrunnsfarge istedenfor gradient */
+    color: #ffffff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px; /* Kan fjernes for en enda mer grunnleggende utseende */
+    transition: background-color 0.3s ease; /* Forenklet til kun bakgrunnsfarge overgang */
+    font-size: 1em;
+}
+a:hover {
+    background-color: #7daa74; /* Lysere nyanser for hover-effekt */
+      border-color: #fff; /* Kan fjernes hvis du ikke ønsker en synlig grense på hover */
+}
+.dark-mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #699460;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+footer {
+    text-align: center;
+    margin-top: 2em;
+    color: #666;
+}
+/* Dark mode stiler */
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+.dark-mode h1 {
+    color: #aad576;
+}
+.dark-mode a {
+    background-image: linear-gradient(to right, #aad576, #8dbb64);
+    color: #333;
+}
+.dark-mode a:hover {
+    background-image: linear-gradient(to right, #8dbb64, #aad576);
+    color: #fff;
+    border-color: #aad576;
+}
+.dark-mode footer {
+    color: #aaa;
+}
