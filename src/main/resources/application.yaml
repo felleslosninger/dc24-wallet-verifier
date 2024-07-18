@@ -2,7 +2,7 @@ spring:
     application:
         name: ansattporten-integration
     session:
-        store-type: redis
+        store-type: none
     security:
         oauth2:
             client:
