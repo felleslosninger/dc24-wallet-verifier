@@ -75,7 +75,7 @@ public class RequestService {
             String presentationReq = PresentationRequest.createPresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
 
             try {
-                GenerateQRCode.GenerateQRCodeImage(presentationReq, 300, 300, path);
+                GenerateQRCode.generateQRCodeImage(presentationReq, 300, 300, path);
             } catch (WriterException | IOException e) {
                 log.error("Error occurred while generating QR Code: {}", e.getMessage());
             }

@@ -15,6 +15,11 @@ import java.nio.file.Path;
  */
 public class GenerateQRCode {
 
+    // Private constructor to hide the public one.
+    private GenerateQRCode () {
+
+    }
+
     /**
      * Generates a QR Code with the specified text, dimensions, and file path.
      *
@@ -25,7 +30,7 @@ public class GenerateQRCode {
      * @throws WriterException if an error occurs while encoding the text to QR Code
      * @throws IOException if an error occurs while writing the QR Code image to file
      */
-    public static void GenerateQRCodeImage(String text, int width, int height, String filePath)
+    public static void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
