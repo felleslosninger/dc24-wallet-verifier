@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.WebSession;
 
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
-import no.idporten.ansattporten_integration.model.VerifiablePresentation.Claims;
-import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -80,11 +78,11 @@ public class VerifierController {
             String responseData = "Hello from verifier";
             
             session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
-            session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaims());
+            session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaimDetails());
             session.getAttributes().put("verified", verifiablePresentation.getVerified());
             session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
-            presClaims = verifiablePresentation.getClaims().getClaims();
+            presClaims = verifiablePresentation.getClaims().getClaimDetails();
             presVerified = verifiablePresentation.getVerified(); 
 
             logger.info("presClaims: " + presClaims);
