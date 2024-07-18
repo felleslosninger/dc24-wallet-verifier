@@ -25,6 +25,8 @@ import java.util.Date;
 @Slf4j
 public class RequestService {
 
+    private static final String NO_ACCESS_TOKEN_FOUND = "No access token found";
+
     private final String tenantURL;
     private final String clientSecret;
     private final String clientId;
@@ -75,7 +77,7 @@ public class RequestService {
             try {
                 GenerateQRCode.GenerateQRCodeImage(presentationReq, 300, 300, path);
             } catch (WriterException | IOException e) {
-                System.err.println("Error occurred while generating QR Code: " + e.getMessage());
+                log.error("Error occurred while generating QR Code: {}", e.getMessage());
             }
         }
     }
@@ -104,8 +106,8 @@ public class RequestService {
                 .asString();
         JsonObject responseObject = JsonParser.parseString(responseContent).getAsJsonObject();
         if (responseObject.get("access_token") == null) {
-            log.error("No access token found");
-            throw new IOException("No access token found");
+            log.error(NO_ACCESS_TOKEN_FOUND);
+            throw new IOException(NO_ACCESS_TOKEN_FOUND);
         }
         mattrJwt = responseObject.get("access_token").getAsString();
         return mattrJwt;
@@ -121,7 +123,7 @@ public class RequestService {
 
         log.info("Getting access token");
         if(mattrJwt == null) {
-            log.info("No access token found");
+            log.info(NO_ACCESS_TOKEN_FOUND);
             return authenticateMattr();
         }
         DecodedJWT decodedJWT = JWT.decode(mattrJwt);
