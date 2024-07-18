@@ -18,7 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-
+/**
+ * Service class for handling presentation requests and templates.
+ */
 @Service
 @Slf4j
 public class RequestService {
@@ -32,6 +34,16 @@ public class RequestService {
 
     private String mattrJwt = null;
 
+    /**
+     * Constructs a new RequestService with the specified parameters.
+     *
+     * @param tenantURL the tenant's base URL
+     * @param clientSecret the client secret for authentication
+     * @param clientId the client ID for authentication
+     * @param domain the domain associated with the presentation template
+     * @param issuerDID the decentralized identifier (DID) of the issuer
+     * @param verifierDID the decentralized identifier (DID) of the verifier
+     */
     public RequestService(@Value("${MATTR_TENANT_URL}") String tenantURL,
                           @Value("${MATTR_CLIENT_SECRET}") String clientSecret,
                           @Value("${MATTR_CLIENT_ID}") String clientId,
@@ -46,6 +58,11 @@ public class RequestService {
         this.verifierDID = verifierDID;
     }
 
+    /**
+     * Creates a presentation and generates a QR code if it does not already exist.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     public void createPresentation() throws IOException {
         String path = "src/main/resources/static/qrCodes/selective-disclosure.png";
         File file = new File(path);
@@ -63,7 +80,12 @@ public class RequestService {
         }
     }
 
-
+    /**
+     * Authenticates with MATTR and retrieves a new JWT access token.
+     *
+     * @return the JWT access token
+     * @throws IOException if an I/O error occurs
+     */
     private String authenticateMattr() throws IOException {
         log.info("Generating new access token");
         JsonObject json = new JsonObject();
@@ -89,6 +111,12 @@ public class RequestService {
         return mattrJwt;
     }
 
+    /**
+     * Retrieves the current JWT access token, refreshing it if necessary.
+     *
+     * @return the JWT access token
+     * @throws IOException if an I/O error occurs
+     */
     public String getJwt() throws IOException {
 
         log.info("Getting access token");
