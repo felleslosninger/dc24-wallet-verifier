@@ -37,7 +37,7 @@ strong {
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 .attribute-header {
-    font-size: 20px; /* Make the Claims header text larger */
+    font-size: 20px; 
     text-align: center;
 }
 .action-button {
@@ -54,19 +54,28 @@ strong {
 .action-button:hover {
     background-color: #577a4d;
 }
-/* Legg til stil for dark mode-knappen */
+
+/* Stil for knappen som aktiverer mørk modus */
 .dark-mode-toggle {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
+    position: fixed; 
+    top: 10px; 
+    right: 10px; 
+    padding: 10px 15px;
     background-color: #699460;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 14px;
+    color: #fff; 
+    border: none; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
 }
+
+.dark-mode-toggle:hover {
+    background-color: #7daa74; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
 /* Dark mode stiler */
 .dark-mode {
     background-color: #333;
@@ -87,9 +96,9 @@ strong {
 }
 .dark-mode .action-button {
     background-color: #aad576;
-    color: #333; /* Endre teksten til mørkere farge for bedre kontrast */
+    color: #333; 
 }
 .dark-mode .action-button:hover {
     background-color: #8dbb64;
-    color: #fff; /* Endre tekstfargen på hover for å matche lysere bakgrunn */
+    color: #fff;
 }
