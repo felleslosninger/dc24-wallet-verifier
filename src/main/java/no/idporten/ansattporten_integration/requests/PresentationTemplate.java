@@ -13,6 +13,9 @@ import java.util.Map;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Service class for creating and handling presentation templates.
+ */
 @Service
 @Slf4j
 public class PresentationTemplate {
@@ -23,15 +26,32 @@ public class PresentationTemplate {
     static String timestamp = currentDateTime.format(formatter);
     static String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
 
-    public static String CreatePresentationTemplate(String issuerDID, String tenantURL, String domain, String token) {
+    // Private constructor to hide the public one.
+    private PresentationTemplate () {
+
+    }
+
+    /**
+     * Creates a presentation template with the given parameters.
+     *
+     * @param issuerDID the decentralized identifier (DID) of the issuer
+     * @param tenantURL the tenant's base URL
+     * @param domain the domain associated with the presentation template
+     * @param token the authentication token
+     * @return the ID of the created presentation template, or an empty String if an error occurs
+     */
+    public static String createPresentationTemplate(String issuerDID, String tenantURL, String domain, String token) {
         try {
+            // Create a map for the trusted issuer details
             Map<String, Object> trustedIssuer = new HashMap<>();
             trustedIssuer.put("issuer", issuerDID);
             trustedIssuer.put("required", true);
 
+            // Create a list of trusted issuers
             List<Map<String, Object>> trustedIssuerList = new ArrayList<>();
             trustedIssuerList.add(trustedIssuer);
 
+            // Create a map for the credential query details
             Map<String, Object> credentialQuery = new HashMap<>();
             credentialQuery.put("required", true);
             credentialQuery.put("reason", "Please provide your certificate for Ansattporten");
@@ -60,16 +80,20 @@ public class PresentationTemplate {
             credentialQuery.put("frame", frame);
             // -------------------------------------------------------------------------------------------------
 
+            // Create a list of credential queries
             List<Map<String, Object>> credentialQueryList = new ArrayList<>();
             credentialQueryList.add(credentialQuery);
 
+            // Create the query map
             Map<String, Object> queries = new HashMap<>();
             queries.put("credentialQuery", credentialQueryList);
             queries.put("type", "QueryByFrame");
 
+            // Create a list of queries
             List<Map<String, Object>> queryList = new ArrayList<>();
             queryList.add(queries);
 
+            // Create the final request map
             Map<String, Object> map = new HashMap<>();
             map.put("domain", domain);
             map.put("name", uniqueTemplateName);
@@ -82,10 +106,11 @@ public class PresentationTemplate {
             SendRequest sendRequest = new SendRequest();
             String jsonResponse = sendRequest.sendRequest(jsonString, tenantURL + requestURL, token);
 
+            // Convert the response to a JSON object to extract the template ID
             JSONObject jsonObject = new JSONObject(jsonResponse); // Convert to json to extract access_token
             return(jsonObject.getString("id"));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("An error occurred while creating a new presentation template", e);
             return "";
         }
     }
