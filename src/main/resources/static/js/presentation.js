@@ -1,27 +1,26 @@
-// Funksjon for å toggle dark mode
-function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
-
-    // Oppdater tekst på knappen
+document.addEventListener('DOMContentLoaded', () => {
     const button = document.querySelector('.dark-mode-toggle');
-    if (body.classList.contains('dark-mode')) {
-        button.textContent = 'Light Mode';
-        localStorage.setItem('theme', 'dark');
-    } else {
-        button.textContent = 'Dark Mode';
-        localStorage.setItem('theme', 'light');
-    }
+    button.addEventListener('click', toggleDarkMode);
+
+    const savedTheme = localStorage.getItem('theme');
+    updateTheme(savedTheme);
+});
+
+function toggleDarkMode() {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    const theme = isDarkMode ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    updateButton(isDarkMode);
 }
 
-// Sjekk og sett tema ved sidens lasting
-document.addEventListener('DOMContentLoaded', (event) => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.querySelector('.dark-mode-toggle').textContent = 'Light Mode';
-    } else {
-        document.body.classList.remove('dark-mode');
-        document.querySelector('.dark-mode-toggle').textContent = 'Dark Mode';
-    }
-});
+function updateTheme(theme) {
+    const isDarkMode = theme === 'dark';
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    updateButton(isDarkMode);
+}
+
+function updateButton(isDarkMode) {
+    const button = document.querySelector('.dark-mode-toggle');
+    button.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+    button.setAttribute('aria-pressed', isDarkMode);
+}
