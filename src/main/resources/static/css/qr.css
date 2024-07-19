@@ -15,7 +15,7 @@ body {
 }
 .container img {
     display: block;
-    margin: 0 auto 20px; /* Space between image and text */
+    margin: 0 auto 20px; /* Space mellom image og text */
 }
 .container h1 {
     color: #699460;
@@ -30,7 +30,7 @@ body {
     background-position: 0% 50%, 50% 50%, 100% 50%;
     background-repeat: no-repeat;
     animation: loading 1s infinite;
-    margin: 30px auto 0; /* Space between text and loading dots, centered */
+    margin: 30px auto 0; /* Space mellom text and loading dots */
 }
 @keyframes loading {
     0%, 33.34%, 66.68%, 100% {
@@ -46,16 +46,51 @@ body {
         background-position: 0% 50%, 50% 50%, 100% 20%;
     }
 }
-/* Legg til stil for dark mode-knappen */
+
+/* Stil for knappen som aktiverer mørk modus */
 .dark-mode-toggle {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    background-color: #699460;
+    position: fixed; 
+    top: 10px; 
+    right: 10px; 
+    padding: 10px 15px; 
+    background-color: #699460; 
+    color: #fff; 
+    border: none; 
+    border-radius: 10px;
+    cursor: pointer; 
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.dark-mode-toggle:hover {
+    background-color: #7daa74; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+/* Dark mode stiler */
+.dark-mode {
+    background-color: #333;
     color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 14px;
+}
+.dark-mode .container {
+    background-color: #333;
+}
+.dark-mode .attribute {
+    background-color: #333;
+    border-left-color: #999;
+}
+.dark-mode h1 {
+    color: #aad576;
+}
+.dark-mode strong {
+    color: #aad576;
+}
+.dark-mode .action-button {
+    background-color: #aad576;
+    color: #333; 
+}
+.dark-mode .action-button:hover {
+    background-color: #8dbb64;
+    color: #fff;
 }
