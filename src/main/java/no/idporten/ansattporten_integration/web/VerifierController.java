@@ -10,23 +10,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.server.WebSession;
+import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpSession;
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
 import no.idporten.ansattporten_integration.model.VerifiablePresentation.Claims;
-import reactor.core.publisher.Mono;
+
 
 import java.util.Map;
 
 import java.io.IOException;
 
-@Controller
+@RestController
 public class VerifierController {
 
     boolean hasReceivedVP = false;
     private final RequestService requestService;
 
-    //Billig løsning for å lagre claims og verified status, bør se på å implementere WebSession
+    //Billig løsning for å lagre claims og verified status, bør se på å implementere HttpSession
     public Map<String,String> presClaims;
     public boolean presVerified;
 
@@ -38,13 +39,13 @@ public class VerifierController {
     }
 
     @GetMapping("/")
-    public String index(WebSession session){
+    public String index(HttpSession session){
         logger.info("Session ID in index: " + session.getId());
         return "index";
     }
 
     @GetMapping("/presentation-view")
-    public String presentation(Model model, WebSession session) {
+    public String presentation(Model model, HttpSession session) {
 
         logger.info("Session ID in /presentation-view: " + session.getId());
 
@@ -63,7 +64,7 @@ public class VerifierController {
 
     @GetMapping("/verification-status")
     @ResponseBody
-    public boolean checkVerificationStatus(WebSession session) {
+    public boolean checkVerificationStatus(HttpSession session) {
         Boolean verified = hasReceivedVP;
         return verified;
     }
@@ -75,16 +76,17 @@ public class VerifierController {
     }
 
     @PostMapping("/callback")
-    public Mono<ResponseEntity<?>> receivePresentation(WebSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
+    public ResponseEntity<?> receivePresentation(HttpSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
         try{
             logger.info("Received presentation callback");
             logger.info("Session ID in /callback: " + session.getId());
             String responseData = "Hello from verifier";
             
-            session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
-            session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaims());
-            session.getAttributes().put("verified", verifiablePresentation.getVerified());
-            session.getAttributes().put("holder", verifiablePresentation.getHolder());
+            session.setAttribute("claims", verifiablePresentation.getClaims().getClaims());
+            // session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
+            // session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaims());
+            // session.getAttributes().put("verified", verifiablePresentation.getVerified());
+            // session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
             presClaims = verifiablePresentation.getClaims().getClaims();
             presVerified = verifiablePresentation.getVerified(); 
@@ -93,13 +95,13 @@ public class VerifierController {
             logger.info("presVerified: " + presVerified);
 
             // Indicate that the presentation was received successfully
-            session.getAttributes().put("presentationReceived", true);
+            // session.getAttributes().put("presentationReceived", true);
             hasReceivedVP = true;
             logger.info(session.getAttribute("presentationReceived").toString());
-            return Mono.just(ResponseEntity.ok(responseData));
+            return ResponseEntity.ok(responseData);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return Mono.just(ResponseEntity.badRequest().body("Error: " + e.getMessage()));
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 }
