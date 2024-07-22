@@ -1,80 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<style>
-		body {
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			margin: 0;
-			padding: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			background-color: hsl(0, 0%, 100%);
-		}
-		.container {
-			text-align: center;
-		}
-		.container img {
-			display: block;
-			margin: 0 auto 20px; /* Space between image and text */
-		}
-		.container h1 {
-			color: #699460;
-			font-size: 64px;
-			margin: 0;
-		}
-		.container #loading-dot {
-			width: 120px;
-			height: 60px;
-			background-image: radial-gradient(circle, #699460 50%, transparent 50%), radial-gradient(circle, #699460 50%, transparent 50%), radial-gradient(circle, #699460 50%, transparent 50%);
-			background-size: 30px 30px;
-			background-position: 0% 50%, 50% 50%, 100% 50%;
-			background-repeat: no-repeat;
-			animation: loading 1s infinite;
-			margin: 30px auto 0; /* Space between text and loading dots, centered */
-		}
-		@keyframes loading {
-			0%, 33.34%, 66.68%, 100% {
-				background-position: 0% 50%, 50% 50%, 100% 50%;
-			}
-			16.67% {
-				background-position: 0% 20%, 50% 50%, 100% 50%;
-			}
-			50.01% {
-				background-position: 0% 50%, 50% 20%, 100% 50%;
-			}
-			83.35% {
-				background-position: 0% 50%, 50% 50%, 100% 20%;
-			}
-		}
-	</style>
-	<script>
-		function pollForVerification() {
-			fetch('/verification-status')
-				.then(response => response.json())
-				.then(data => {
-					if (data == true) {
-						window.location.href = '/presentation-view';
-					} else {
-						setTimeout(pollForVerification, 2000); // Poll every 2 seconds
-					}
-				});
-		}
-
-		document.addEventListener("DOMContentLoaded", function() {
-			pollForVerification();
-		});
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/qr.css}"/>
+    <title>qrCode</title>
 </head>
 <body>
-	<div class="container">
-		<img src="qrCodes/selective-disclosure.png" alt="QR Code">
-		<h1>Scan QR-kode</h1>
-		<div id="loading-dot"></div>
-	</div>
+    <!-- Dark mode-knapp -->
+    <button class="dark-mode-toggle" aria-label="Toggle dark mode">Dark Mode</button>
+
+    <div class="container">
+        <img src="qrCodes/selective-disclosure.png" alt="QR Code" role="img" aria-label="QR Code for selective disclosure">
+        <h1>Scan QR-kode</h1>
+        <div id="loading-dot"></div>
+    </div>
+    <script th:src="@{/js/qr.js}" defer></script>
 </body>
 </html>

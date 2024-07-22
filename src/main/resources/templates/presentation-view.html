@@ -1,80 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Verifiserte Attributter</title>
-	<style>
-		body {
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			margin: 0;
-			padding: 20px;
-			background-color: #ffffff;
-		}
-		.container {
-			max-width: 600px;
-			margin: auto;
-			background: #fff;
-			padding: 20px;
-			border-radius: 8px;
-		}
-		h1 {
-			color: #699460;
-			text-align: center;
-		}
-		p {
-			font-size: 16px;
-			line-height: 1.6;
-			color: #333;
-		}
-		strong {
-			color: #699460;
-		}
-		.attribute {
-			background-color: #e8f5e9;
-			border-left: 4px solid #699460;
-			padding: 10px;
-			margin: 10px 0;
-			border-radius: 4px;
-			transition: transform 0.3s ease;
-		}
-		.attribute:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-		}
-		.attribute-header {
-            font-size: 20px; /* Make the Claims header text larger */
-			text-align: center;
-        }
-		.action-button {
-			display: block;
-			width: max-content;
-			margin: 20px auto;
-			padding: 10px 20px;
-			background-color: #699460;
-			color: #ffffff;
-			text-decoration: none;
-			border-radius: 5px;
-			transition: background-color 0.3s ease;
-		}
-		.action-button:hover {
-			background-color: #577a4d;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/presentation.css}"/>
+    <title>Verifiserte Attributter</title>
 </head>
 <body>
-	<div class="container">
-		<h1>Verifiserte Attributter</h1>
-		<div class="attribute">
-			<p class="attribute-header"><strong>Claims</strong> 
-				<div th:each="entry : ${claims}">
-					<p><strong th:text="${entry.key}"></strong>: <span th:text="${entry.value}"></span></p>
-				</div>
-		</div>
-		<div class="attribute">
-			<p><strong>Verified:</strong> <span th:text="${verified}"></span></p>
-		</div>
-		<a href="#" class="action-button">Utfør en handling</a>
-	</div>
+    <header>
+        <!-- Dark mode-knapp -->
+        <button class="dark-mode-toggle" aria-label="Toggle dark mode" aria-pressed="false">Dark Mode</button>
+    </header>
+    <main class="container">
+        <h1>Verifiserte Attributter</h1>
+        <div class="attribute">
+            <p class="attribute-header"><strong>Claims</strong></p>
+            <div th:each="entry : ${claims}">
+                <p><strong th:text="${entry.key}"></strong>: <span th:text="${entry.value}"></span></p>
+            </div>
+        </div>
+        <div class="attribute">
+            <p><strong>Verified:</strong> <span th:text="${verified}"></span></p>
+        </div>
+        <a href="#" class="action-button">Utfør en handling</a>
+    </main>
+    <script th:src="@{/js/presentation.js}" defer></script>
 </body>
 </html>

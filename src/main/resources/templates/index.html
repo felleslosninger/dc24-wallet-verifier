@@ -1,50 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<style>
-		body {
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			margin: 0;
-			padding: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			background-color: hsl(0, 0%, 100%);
-		}
-		h1 {
-			color: #699460;
-			font-size: 54px;
-			text-align: center;
-		}
-		p {
-			text-align: center;
-			margin: 20px 0;
-		}
-		a {
-			display: inline-block;
-			background-image: linear-gradient(to right, #699460, #7daa74);
-			color: #ffffff;
-			padding: 10px 15px;
-			text-decoration: none;
-			border-radius: 5px;
-			transition: all 0.3s ease;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		}
-		a:hover {
-			background-image: linear-gradient(to right, #7daa74, #699460);
-			transform: translateY(-2px);
-			box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" href="css/index.css"/>
+    <script src="js/index.js" defer></script>
+    <title>Velkommen til vår tilgjengelige nettside</title>
 </head>
 <body>
-	<div>
-		<h1>Funksjonalitet for å velge hvilke data som skal deles</h1>
-		<p><a href="/qr-code">Gå til QR-kode!</a></p>
-	</div>
+    <header>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Aktiver eller deaktiver mørk modus" aria-pressed="false">Dark Mode</button>
+    </header>
+    <main aria-labelledby="main-heading">
+        <article>
+            <h1 id="main-heading">Funksjonalitet for å velge hvilke data som skal deles</h1>
+            <p>Denne siden lar deg velge hvilke personlige data du ønsker å dele med oss.</p>
+            <p><a href="/qr-code" aria-label="Naviger til siden for å generere din personlige QR-kode">Gå til QR-kode!</a></p>
+        </article>
+    </main>
 </body>
 </html>

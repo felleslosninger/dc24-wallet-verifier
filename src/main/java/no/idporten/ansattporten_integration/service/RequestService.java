@@ -18,10 +18,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-
+/**
+ * Service class for handling presentation requests and templates.
+ */
 @Service
 @Slf4j
 public class RequestService {
+
+    private static final String NO_ACCESS_TOKEN_FOUND = "No access token found";
 
     private final String tenantURL;
     private final String clientSecret;
@@ -32,6 +36,16 @@ public class RequestService {
 
     private String mattrJwt = null;
 
+    /**
+     * Constructs a new RequestService with the specified parameters.
+     *
+     * @param tenantURL the tenant's base URL
+     * @param clientSecret the client secret for authentication
+     * @param clientId the client ID for authentication
+     * @param domain the domain associated with the presentation template
+     * @param issuerDID the decentralized identifier (DID) of the issuer
+     * @param verifierDID the decentralized identifier (DID) of the verifier
+     */
     public RequestService(@Value("${MATTR_TENANT_URL}") String tenantURL,
                           @Value("${MATTR_CLIENT_SECRET}") String clientSecret,
                           @Value("${MATTR_CLIENT_ID}") String clientId,
@@ -46,24 +60,34 @@ public class RequestService {
         this.verifierDID = verifierDID;
     }
 
+    /**
+     * Creates a presentation and generates a QR code if it does not already exist.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     public void createPresentation() throws IOException {
         String path = "src/main/resources/static/qrCodes/selective-disclosure.png";
         File file = new File(path);
 
         // Only generates a new qr code if it can't find an existing one
         if (!file.exists()) {
-            String presentationTemplateId = PresentationTemplate.CreatePresentationTemplate(issuerDID, tenantURL, domain, getJwt());
-            String presentationReq = PresentationRequest.CreatePresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
+            String presentationTemplateId = PresentationTemplate.createPresentationTemplate(issuerDID, tenantURL, domain, getJwt());
+            String presentationReq = PresentationRequest.createPresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
 
             try {
-                GenerateQRCode.GenerateQRCodeImage(presentationReq, 300, 300, path);
+                GenerateQRCode.generateQRCodeImage(presentationReq, 300, 300, path);
             } catch (WriterException | IOException e) {
-                System.err.println("Error occurred while generating QR Code: " + e.getMessage());
+                log.error("Error occurred while generating QR Code: {}", e.getMessage());
             }
         }
     }
 
-
+    /**
+     * Authenticates with MATTR and retrieves a new JWT access token.
+     *
+     * @return the JWT access token
+     * @throws IOException if an I/O error occurs
+     */
     private String authenticateMattr() throws IOException {
         log.info("Generating new access token");
         JsonObject json = new JsonObject();
@@ -82,18 +106,24 @@ public class RequestService {
                 .asString();
         JsonObject responseObject = JsonParser.parseString(responseContent).getAsJsonObject();
         if (responseObject.get("access_token") == null) {
-            log.error("No access token found");
-            throw new IOException("No access token found");
+            log.error(NO_ACCESS_TOKEN_FOUND);
+            throw new IOException(NO_ACCESS_TOKEN_FOUND);
         }
         mattrJwt = responseObject.get("access_token").getAsString();
         return mattrJwt;
     }
 
+    /**
+     * Retrieves the current JWT access token, refreshing it if necessary.
+     *
+     * @return the JWT access token
+     * @throws IOException if an I/O error occurs
+     */
     public String getJwt() throws IOException {
 
         log.info("Getting access token");
         if(mattrJwt == null) {
-            log.info("No access token found");
+            log.info(NO_ACCESS_TOKEN_FOUND);
             return authenticateMattr();
         }
         DecodedJWT decodedJWT = JWT.decode(mattrJwt);

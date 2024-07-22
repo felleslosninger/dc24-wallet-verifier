@@ -8,8 +8,12 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 public class VerifierApplication {
 
+	/**
+	 * The main method that serves as the entry point for the Spring Boot application.
+	 *
+	 * @param args command-line arguments passed to the application
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(VerifierApplication.class, args);
 	}
-
 }

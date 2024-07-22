@@ -24,26 +24,43 @@ import java.io.IOException;
 @RestController
 public class VerifierController {
 
+    private static final Logger logger = LoggerFactory.getLogger(VerifierController.class);
+
     boolean hasReceivedVP = false;
     private final RequestService requestService;
 
-    //Billig løsning for å lagre claims og verified status, bør se på å implementere HttpSession
+    // Temporary solution to store claims and verified status; consider implementing WebSession for better handling
     public Map<String,String> presClaims;
     public boolean presVerified;
 
-    private static final Logger logger = LoggerFactory.getLogger(VerifierController.class);
-
-    // Needed to initialize the requestService object above
+    /**
+     * Constructs a new VerifierController with the specified RequestService.
+     *
+     * @param requestService the service to handle presentation requests
+     */
     public VerifierController(RequestService requestService) {
         this.requestService = requestService;
     }
 
+    /**
+     * Handles GET requests to the root URL ("/").
+     *
+     * @param session the current web session
+     * @return the name of the view to render
+     */
     @GetMapping("/")
     public String index(HttpSession session){
         logger.info("Session ID in index: " + session.getId());
         return "index";
     }
 
+    /**
+     * Handles GET requests to "/presentation-view".
+     *
+     * @param model the model to hold attributes for the view
+     * @param session the current web session
+     * @return the name of the view to render
+     */
     @GetMapping("/presentation-view")
     public String presentation(Model model, HttpSession session) {
 
@@ -54,14 +71,19 @@ public class VerifierController {
         logger.info("verified: " + session.getAttribute("verified"));
         logger.info("holder: " + session.getAttribute("holder"));
 
-
         model.addAttribute("challengeId", session.getAttribute("challengeId"));
         model.addAttribute("claims", session.getAttribute("claims"));
         model.addAttribute("verified", presVerified);
         model.addAttribute("holder", session.getAttribute("holder"));
         return "presentation-view";
-    }  
+    }
 
+    /**
+     * Handles GET requests to "/verifiaction-status".
+     *
+     * @param session the current web session
+     * @return a boolean indicating whether the verification presentation has been received
+     */
     @GetMapping("/verification-status")
     @ResponseBody
     public boolean checkVerificationStatus(HttpSession session) {
@@ -69,12 +91,26 @@ public class VerifierController {
         return verified;
     }
 
+    /**
+     * Handles GET requests to "/qr-code" and triggers the creation of a presentation.
+     *
+     * @return the name of the view to render
+     * @throws IOException if an I/O error occurs
+     */
     @GetMapping("/qr-code")
     public String qrCode() throws IOException {
         requestService.createPresentation();
         return "qr-code";
     }
 
+    /**
+     * Handles POST requests to "/callback" to receive a verifiable presentation.
+     *
+     * @param session the current web session
+     * @param model the model to hold attributes for the view
+     * @param verifiablePresentation the verifiable presentation received in the request body
+     * @return a ResponseEntity indicating the result of the request
+     */
     @PostMapping("/callback")
     public ResponseEntity<?> receivePresentation(HttpSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
         try{
@@ -88,7 +124,7 @@ public class VerifierController {
             // session.getAttributes().put("verified", verifiablePresentation.getVerified());
             // session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
-            presClaims = verifiablePresentation.getClaims().getClaims();
+            presClaims = verifiablePresentation.getClaims().getClaimDetails();
             presVerified = verifiablePresentation.getVerified(); 
 
             logger.info("presClaims: " + presClaims);
