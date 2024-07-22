@@ -1,3 +1,19 @@
+document.addEventListener("DOMContentLoaded", function() {
+    pollForVerification();
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+
+    // Sjekk og sett tema ved sidens lasting
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = 'Light Mode';
+    } else {
+        document.body.classList.remove('dark-mode');
+        darkModeToggle.textContent = 'Dark Mode';
+    }
+});
+
 function pollForVerification() {
     fetch('/verification-status')
         .then(response => response.json())
@@ -10,11 +26,6 @@ function pollForVerification() {
         });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    pollForVerification();
-});
-
-// Funksjon for å toggle dark mode
 function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle('dark-mode');
@@ -29,15 +40,3 @@ function toggleDarkMode() {
         localStorage.setItem('theme', 'light');
     }
 }
-
-// Sjekk og sett tema ved sidens lasting
-document.addEventListener('DOMContentLoaded', (event) => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.querySelector('.dark-mode-toggle').textContent = 'Light Mode';
-    } else {
-        document.body.classList.remove('dark-mode');
-        document.querySelector('.dark-mode-toggle').textContent = 'Dark Mode';
-    }
-});

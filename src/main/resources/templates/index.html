@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/index.css}"/>
-    <script th:src="@{/js/index.js}"></script>
-    <title>Index</title>
+    <link rel="stylesheet" type="text/css" media="all" href="css/index.css"/>
+    <script src="js/index.js" defer></script>
+    <title>Velkommen til vår tilgjengelige nettside</title>
 </head>
 <body>
-    <!-- Dark mode-knapp -->
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
-
-    <div>
-        <h1>Funksjonalitet for å velge hvilke data som skal deles</h1>
-        <p><a href="/qr-code">Gå til QR-kode!</a></p>
-    </div>
+    <header>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Aktiver eller deaktiver mørk modus" aria-pressed="false">Dark Mode</button>
+    </header>
+    <main aria-labelledby="main-heading">
+        <article>
+            <h1 id="main-heading">Funksjonalitet for å velge hvilke data som skal deles</h1>
+            <p>Denne siden lar deg velge hvilke personlige data du ønsker å dele med oss.</p>
+            <p><a href="/qr-code" aria-label="Naviger til siden for å generere din personlige QR-kode">Gå til QR-kode!</a></p>
+        </article>
+    </main>
 </body>
 </html>
-

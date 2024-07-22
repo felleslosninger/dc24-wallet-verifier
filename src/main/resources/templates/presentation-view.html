@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/presentation.css}"/>
-    <script th:src="@{/js/presentation.js}"></script>
     <title>Verifiserte Attributter</title>
 </head>
 <body>
-    <!-- Dark mode-knapp -->
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
-
-    <div class="container">
+    <header>
+        <!-- Dark mode-knapp -->
+        <button class="dark-mode-toggle" aria-label="Toggle dark mode" aria-pressed="false">Dark Mode</button>
+    </header>
+    <main class="container">
         <h1>Verifiserte Attributter</h1>
         <div class="attribute">
             <p class="attribute-header"><strong>Claims</strong></p>
@@ -23,7 +23,7 @@
             <p><strong>Verified:</strong> <span th:text="${verified}"></span></p>
         </div>
         <a href="#" class="action-button">Utfør en handling</a>
-    </div>
+    </main>
+    <script th:src="@{/js/presentation.js}" defer></script>
 </body>
 </html>
-
