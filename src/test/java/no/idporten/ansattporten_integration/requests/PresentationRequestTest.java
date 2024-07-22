@@ -1,6 +1,7 @@
 package no.idporten.ansattporten_integration.requests;
 
 import no.idporten.ansattporten_integration.util.SendRequest;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
