@@ -15,7 +15,7 @@ body {
 /* Stil for hovedoverskrifter */
 h1 {
     color: #699460; 
-    font-size: 3em; 
+    font-size: 24px;
     text-align: center; 
     margin: 0.5em 0; 
 }
@@ -24,6 +24,7 @@ h1 {
 p {
     text-align: center; 
     margin: 1em 0; 
+    font-size: 14px;
 }
 
 /* Stil for lenker */
