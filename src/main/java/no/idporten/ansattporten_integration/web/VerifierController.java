@@ -4,7 +4,6 @@ import no.idporten.ansattporten_integration.service.RequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
-import no.idporten.ansattporten_integration.model.VerifiablePresentation.Claims;
 
 
 import java.util.Map;
@@ -62,19 +60,10 @@ public class VerifierController {
      * @return the name of the view to render
      */
     @GetMapping("/presentation-view")
-    public String presentation(Model model, HttpSession session) {
+    public String presentation(Model model) {
 
-        logger.info("Session ID in /presentation-view: " + session.getId());
-
-        logger.info("challengeId: " + session.getAttribute("challengeId"));
-        logger.info("claims: " + session.getAttribute("claims"));
-        logger.info("verified: " + session.getAttribute("verified"));
-        logger.info("holder: " + session.getAttribute("holder"));
-
-        model.addAttribute("challengeId", session.getAttribute("challengeId"));
-        model.addAttribute("claims", session.getAttribute("claims"));
+        model.addAttribute("claims", presClaims);
         model.addAttribute("verified", presVerified);
-        model.addAttribute("holder", session.getAttribute("holder"));
         return "presentation-view";
     }
 
@@ -86,7 +75,7 @@ public class VerifierController {
      */
     @GetMapping("/verification-status")
     @ResponseBody
-    public boolean checkVerificationStatus(HttpSession session) {
+    public boolean checkVerificationStatus() {
         Boolean verified = hasReceivedVP;
         return verified;
     }
@@ -112,17 +101,10 @@ public class VerifierController {
      * @return a ResponseEntity indicating the result of the request
      */
     @PostMapping("/callback")
-    public ResponseEntity<?> receivePresentation(HttpSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
+    public ResponseEntity<?> receivePresentation(Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
         try{
             logger.info("Received presentation callback");
-            logger.info("Session ID in /callback: " + session.getId());
             String responseData = "Hello from verifier";
-            
-            session.setAttribute("claims", verifiablePresentation.getClaims().getClaims());
-            // session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
-            // session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaims());
-            // session.getAttributes().put("verified", verifiablePresentation.getVerified());
-            // session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
             presClaims = verifiablePresentation.getClaims().getClaimDetails();
             presVerified = verifiablePresentation.getVerified(); 
@@ -133,7 +115,6 @@ public class VerifierController {
             // Indicate that the presentation was received successfully
             // session.getAttributes().put("presentationReceived", true);
             hasReceivedVP = true;
-            logger.info(session.getAttribute("presentationReceived").toString());
             return ResponseEntity.ok(responseData);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
