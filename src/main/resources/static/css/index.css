@@ -1,91 +1,90 @@
 /* Grunnleggende stilinnstillinger for hele nettsiden */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    min-height: 100vh; 
-    background-color: hsl(0, 0%, 100%); 
-    transition: background-color 0.3s, color 0.3s; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #F0F2F5; /* Lysere grå for en mykere bakgrunn */
+    color: #1E2B3C; /* Blåsvart for bedre lesbarhet */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Stil for hovedoverskrifter */
 h1 {
-    color: #699460; 
+    color: #1E2B3C; /* Blåsvart for konsistens */
     font-size: 24px;
-    text-align: center; 
-    margin: 0.5em 0; 
+    text-align: center;
+    margin: 0.5em 0;
 }
 
 /* Stil for paragrafer */
 p {
-    text-align: center; 
-    margin: 1em 0; 
+    text-align: center;
+    margin: 1em 0;
     font-size: 14px;
+    color: #1E2B3C; /* Blåsvart for konsistens */
 }
 
 /* Stil for lenker */
 a {
-    display: inline-block; 
-    background-color: #699460; 
-    color: #ffffff; 
-    padding: 10px 15px; 
+    display: inline-block;
+    background-color: #1E98F5; /* Blå */
+    color: #ffffff;
+    padding: 10px 15px;
     text-decoration: none;
-    border-radius: 5px; 
-    transition: background-color 0.3s ease; 
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
     font-size: 1em;
 }
 
 /* Stil for lenker ved hover */
 a:hover {
-    background-color: #7daa74; 
+    background-color: #1667A1; /* En mørkere nyanse av blå for hover */
 }
 
 /* Stil for knappen som aktiverer mørk modus */
 .dark-mode-toggle {
-    position: fixed; 
-    top: 10px; 
-    right: 10px; 
-    padding: 10px 15px; 
-    background-color: #699460; 
-    color: #fff; 
-    border: none; 
-    border-radius: 10px; 
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    background-color: #C2132C; 
+    color: #fff;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dark-mode-toggle:hover {
-    background-color: #7daa74; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    background-color: #C2132C; 
 }
 
 /* Stiler for nettsiden i mørk modus */
 .dark-mode {
-    background-color: #333; 
-    color: #fff; 
+    background-color: #1E2B3C; /* Blåsvart for mørk modus */
+    color: #F0F2F5; /* Lysere grå for kontrast */
 }
 
-.dark-mode h1 {
-    color: #aad576; 
+.dark-mode h1, .dark-mode p, .dark-mode a {
+    color: #F0F2F5; /* Lysere grå for kontrast */
 }
 
 .dark-mode a {
-    background-image: linear-gradient(to right, #aad576, #8dbb64); 
-    color: #333; 
+    background-color: #0062B8; /* Mørk blå for lenker i mørk modus */
+    color: #fff;
 }
 
 .dark-mode a:hover {
-    background-image: linear-gradient(to right, #8dbb64, #aad576); 
-    color: #fff; 
-    border-color: #aad576; 
+    background-color: #004A8F; /* En mørkere nyanse av blå for hover */
 }
 
 .dark-mode footer {
-    color: #aaa; 
+    color: #aaa; /* Lysere grå for bedre lesbarhet */
 }
