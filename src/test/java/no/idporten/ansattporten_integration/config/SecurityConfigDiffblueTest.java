@@ -26,6 +26,13 @@ class SecurityConfigDiffblueTest {
     @Autowired
     private SecurityConfig securityConfig;
 
+    /**
+     * This test verifies the correct setup of the security filter chain.
+     * It checks that the chain is an instance of MatcherSecurityWebFilterChain
+     * and verifies the presence and types of the filters in the chain.
+     *
+     * @throws AssertionError if an assertion fails.
+     */
     @Test
     void testSpringSecurityFilterChain() throws AssertionError {
         // Arrange and Act
@@ -56,8 +63,10 @@ class SecurityConfigDiffblueTest {
     }
 
     /**
-     * Method under test:
-     * {@link SecurityConfig#springSecurityFilterChain(ServerHttpSecurity)}
+     * This test verifies the correct setup of the security filter chain
+     * when a mock filter is added at the first position in the filter chain.
+     *
+     * @throws AssertionError if an assertion fails.
      */
     @Test
     void testSpringSecurityFilterChain2() throws AssertionError {
