@@ -1,6 +1,7 @@
 package no.idporten.ansattporten_integration.util;
 
 import com.google.zxing.WriterException;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
