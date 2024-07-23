@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="all" href="/css/presentation.css"/>
-    <script th:src="@{/js/presentation.js}" defer></script>
-    <title>Verifiserte Attributter</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" media="all" href="/css/presentation.css"/>
+	<script th:src="@{/js/presentation.js}" defer></script>
+	<title>Verifiserte Attributter</title>
 </head>
 <body>
-    <header>
-        <button class="dark-mode-toggle" aria-pressed="false">Dark Mode</button>
-    </header>
-    <main class="container">
-        <h1>Verifiserte Attributter</h1>
-        <div class="attribute">
-            <p class="attribute-header">Claims</p>
-            <div class="attribute-content" id="claims-container">
-                <!-- Dynamisk innhold fra Postman vil bli lastet her -->
-            </div>
-        </div>
-        <div class="attribute">
-            <p><strong>Verified:</strong> <span id="verified-status">Loading...</span></p>
-        </div>
-        <a href="#" class="action-button">Utfør en handling</a>
-    </main>
+	<header>
+        <button class="dark-mode-toggle" aria-pressed="false" aria-label="Aktiver dark mode for bedre lesbarhet">Dark Mode</button>
+        <nav>
+            <ul>
+                <li><a href="javascript:history.back()" class="back-button">Tilbake</a></li>
+            </ul>		
+        </nav>
+	</header>
+	<main class="container">
+		<section>
+			<h1>Verifiserte Attributter</h1>
+			<div class="attribute">
+				<p class="attribute-header">Claims</p>
+				<div class="attribute-content" id="claims-container">
+					<!-- Dynamisk innhold fra Postman vil bli lastet her -->
+				</div>
+			</div>
+			<div class="attribute">
+				<p><strong>Verified:</strong> <span id="verified-status">Loading...</span></p>
+			</div>
+		</section>
+		<section>
+			<a href="#" class="action-button">Utfør en handling</a>
+		</section>
+	</main>
 </body>
 </html>
