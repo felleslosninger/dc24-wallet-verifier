@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main    
+      - deploy_with_GitHub_Actions
 jobs:
   deploy:
     name: Deploy app
