@@ -1,22 +1,22 @@
-// Funksjon for å toggle dark mode
-function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
+document.addEventListener("DOMContentLoaded", function() {
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    darkModeToggle.addEventListener('click', toggleDarkMode);
 
-    // Oppdater tekst og aria-pressed på knappen
-    const button = document.querySelector('.dark-mode-toggle');
-    const isDarkMode = body.classList.contains('dark-mode');
-    button.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
-    button.setAttribute('aria-pressed', isDarkMode);
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    // Sjekk og sett tema ved sidens lasting basert på lagret tema eller systeminnstillinger
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    updateTheme(savedTheme);
+});
+
+function toggleDarkMode() {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    updateTheme(isDarkMode ? 'dark' : 'light');
 }
 
-// Sjekk og sett tema ved sidens lasting
-document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    const isDarkMode = savedTheme === 'dark';
+function updateTheme(theme) {
+    const isDarkMode = theme === 'dark';
     document.body.classList.toggle('dark-mode', isDarkMode);
     const button = document.querySelector('.dark-mode-toggle');
     button.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
-    button.setAttribute('aria-pressed', isDarkMode);
-});
+    button.setAttribute('aria-pressed', isDarkMode.toString());
+    localStorage.setItem('theme', theme);
+}

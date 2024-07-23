@@ -3,22 +3,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const darkModeToggle = document.querySelector('.dark-mode-toggle');
     darkModeToggle.addEventListener('click', toggleDarkMode);
 
-    // Sjekk og sett tema ved sidens lasting
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        darkModeToggle.textContent = 'Light Mode';
-    } else {
-        document.body.classList.remove('dark-mode');
-        darkModeToggle.textContent = 'Dark Mode';
-    }
+    // Sjekk og sett tema ved sidens lasting basert på lagret tema eller systeminnstillinger
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    updateTheme(savedTheme);
 });
 
 function pollForVerification() {
     fetch('/verification-status')
         .then(response => response.json())
         .then(data => {
-            if (data == true) {
+            if (data === true) { // Use strict equality for comparison
                 window.location.href = '/presentation-view';
             } else {
                 setTimeout(pollForVerification, 2000); // Poll every 2 seconds
@@ -27,16 +21,15 @@ function pollForVerification() {
 }
 
 function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    updateTheme(isDarkMode ? 'dark' : 'light');
+}
 
-    // Oppdater tekst på knappen
+function updateTheme(theme) {
+    const isDarkMode = theme === 'dark';
+    document.body.classList.toggle('dark-mode', isDarkMode);
     const button = document.querySelector('.dark-mode-toggle');
-    if (body.classList.contains('dark-mode')) {
-        button.textContent = 'Light Mode';
-        localStorage.setItem('theme', 'dark');
-    } else {
-        button.textContent = 'Dark Mode';
-        localStorage.setItem('theme', 'light');
-    }
+    button.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+    button.setAttribute('aria-pressed', isDarkMode.toString());
+    localStorage.setItem('theme', theme);
 }
