@@ -17,14 +17,6 @@ primary_region = 'ams'
   min_machines_running = 0
   processes = ['app']
 
-[env]
-  MATTR_TENANT_URL="hei123"
-  MATTR_CLIENT_ID="hei123"
-  MATTR_CLIENT_SECRET="hei123"
-  MATTR_DOMAIN="hei123"
-  MATTR_ISSUER_DID="hei123"
-  MATTR_VERIFIER_DID="hei123"
-
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
