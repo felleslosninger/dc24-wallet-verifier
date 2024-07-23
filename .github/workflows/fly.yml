@@ -1,0 +1,22 @@
+name: Fly Deploy
+on:
+  push:
+    branches:
+      - main    
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    concurrency: deploy-group    # optional: ensure only one action runs at a time
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          MATTR_CLIENT_SECRET: ${{ secrets.MATTR_CLIENT_SECRET }}
+          MATTR_CLIENT_ID: 'GAzkUGEWppv9Pxeo7rnVZplIgzmYAuAJ'
+          MATTR_DOMAIN: 'karsten-friis-dyttcc.vii.au01.mattr.global'
+          MATTR_ISSUER_DID: 'did:web:karsten-friis-dyttcc.vii.au01.mattr.global'
+          MATTR_TENANT_URL: 'https://karsten-friis-dyttcc.vii.au01.mattr.global'
+          MATTR_VERIFIER_DID: 'did:web:karsten-friis-dyttcc.vii.au01.mattr.global'
