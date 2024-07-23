@@ -7,7 +7,5 @@ target/
 *.ipr
 *.env
 
-fly.toml
-
 ### VS Code ###
 .vscode/
