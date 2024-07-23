@@ -1,22 +1,26 @@
-/* Grunnleggende stilinnstillinger for hele nettsiden */
+html {
+    height: 100%; /* Sørger for at html-elementet strekker seg til hele høyden av viewporten */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 0 20px; /* Legger til padding på sidene av body for å forhindre at innholdet strekker seg helt ut */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Endret fra center til space-between for å skyve footeren ned */
     align-items: center;
-    min-height: 100vh;
+    min-height: 100vh; /* Sørger for at body strekker seg til minst hele høyden av viewporten */
     background-color: #F0F2F5; /* Lysere grå for en mykere bakgrunn */
     color: #1E2B3C; /* Blåsvart for bedre lesbarhet */
     transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem; /* Basertekststørrelse */
 }
 
 /* Stil for hovedoverskrifter */
 h1 {
     color: #1E2B3C; /* Blåsvart for konsistens */
-    font-size: 24px;
+    font-size: 2.5em; /* Dynamisk størrelse basert på kroppens font-størrelse */
     text-align: center;
     margin: 0.5em 0;
 }
@@ -87,4 +91,13 @@ a:hover {
 
 .dark-mode footer {
     color: #aaa; /* Lysere grå for bedre lesbarhet */
+}
+
+footer {
+    margin-top: 10px; /* Skyver footeren 20px ned fra innholdet over */
+    text-align: center; /* Sentrerer tekst eller andre elementer i footeren */
+    color: #1E2B3C; /* Tekstfarge som matcher body */
+    transition: background-color 0.3s, color 0.3s; /* Overgang for mørk modus */
+    font-size: 12px; /* Spesifikk, liten skriftstørrelse */
+
 }

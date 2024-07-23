@@ -1,20 +1,39 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #F0F2F5; /* Lysere grå for en mykere bakgrunn */
-    color: #1E2B3C; /* Blåsvart for bedre lesbarhet */
+    padding: 40px; /* Økt padding for mer plass rundt innholdet */
+    background-color: #F0F2F5;
+    color: #1E2B3C;
     transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Sentrerer barn-elementer horisontalt */
+    justify-content: center; /* Sentrerer barn-elementer vertikalt */
 }
 
 .container {
-    max-width: 700px;
-    margin: 40px auto; /* Økt margin-top for å flytte boksen ned */
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Myk skygge for dybde */
+    width: 90%;
+    margin: 20px auto; /* Sikrer sentrering og legger til vertikal margin */
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background: #FFFFFF;
 }
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: calc(100% - 40px); /* Justerer bredde for å unngå å berøre kantene */
+        padding: 0 10px;
+        margin: 20px 20px; /* Øker side-margins for å unngå å berøre kantene */
+    }
+}
+
 
 h1 {
     color: #0062B8; /* Mørk blå */
@@ -123,3 +142,47 @@ h1 {
 .dark-mode .action-button:hover {
     background-color: #004A8F; /* En mørkere nyanse av blå for hover */
 }
+
+/* Stil for tilbakeknappen */
+.back-button {
+    position: fixed;
+    top: 10px;
+    left: 10px; /* Plassert på venstre side */
+    padding: 10px 15px;
+    background-color: #C2132C; /* Rød */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #A10D24; /* Mørkere rød for hover-effekt */
+}
+
+/* Sørger for at .back-button beholder sin røde farge i mørk modus */
+.dark-mode .back-button, .dark-mode .back-button:hover {
+    background-color: #C2132C; /* Rød */
+    color: #fff;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin-right: 20px; /* Juster etter behov */
+}
+
+nav a {
+    text-decoration: none;
+    color: #000; /* Endre farge etter behov */
+}
+
+
