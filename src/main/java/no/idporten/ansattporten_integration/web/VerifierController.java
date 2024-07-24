@@ -98,6 +98,7 @@ public class VerifierController {
     @GetMapping("/qr-code")
     public String qrCode(Model model) {
         try {
+            logger.info("Creating presentation");
             requestService.createPresentation();
             return "qr-code";
         } catch (IOException e) {

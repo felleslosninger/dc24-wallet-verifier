@@ -66,6 +66,7 @@ public class RequestService {
      * @throws IOException if an I/O error occurs
      */
     public void createPresentation() throws IOException {
+        log.info("Creating presentation in RequestService");
         String path = "src/main/resources/static/qrCodes/selective-disclosure.png";
         File file = new File(path);
 
