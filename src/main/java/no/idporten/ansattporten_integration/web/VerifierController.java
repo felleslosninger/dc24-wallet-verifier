@@ -66,8 +66,8 @@ public class VerifierController {
         HttpSession session = request.getSession();
 
         logger.info("Session ID in /presentation-view: " + session.getId());
-        logger.info("Session data for claims in /presentation-view:", session.getAttribute("claims"));
-        model.addAttribute("claims", presClaims);
+        logger.info("Session data for claims in /presentation-view:{}", session.getAttribute("claims"));
+        model.addAttribute("claims", session.getAttribute("claims"));
         model.addAttribute("verified", presVerified);
         return "presentation-view";
     }
@@ -121,7 +121,7 @@ public class VerifierController {
 
             session.setAttribute("claims", presClaims);
             logger.info("Session ID in /callback: " + request.getSession().getId());
-            logger.info("Session data for claims in /callback:", session.getAttribute("claims"));
+            logger.info("Session data for claims in /callback:" + session.getAttribute("claims"));
             // Indicate that the presentation was received successfully
             // session.getAttributes().put("presentationReceived", true);
             hasReceivedVP = true;
