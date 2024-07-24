@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build --tag my-app:latest .
+          docker build -f Dockerfile.jvm -t my-app:latest .
         env:
           MATTR_CLIENT_SECRET: ${{ secrets.MATTR_CLIENT_SECRET }}
           MATTR_CLIENT_ID: ${{ secrets.MATTR_CLIENT_ID }}
