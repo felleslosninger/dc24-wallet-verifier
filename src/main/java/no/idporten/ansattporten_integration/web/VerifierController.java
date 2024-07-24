@@ -105,6 +105,7 @@ public class VerifierController {
             logger.error("Error creating presentation", e);
             model.addAttribute("error", e.getMessage());
             return "error";
+            
         }
     }
 
