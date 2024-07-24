@@ -82,6 +82,13 @@ public class RequestService {
         }
     }
 
+    public String getQR() throws IOException {
+        String presentationTemplateId = PresentationTemplate.createPresentationTemplate(issuerDID, tenantURL, domain, getJwt());
+        String presentationReq = PresentationRequest.createPresentationRequest(verifierDID, tenantURL, presentationTemplateId, getJwt());
+    
+        return "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + presentationReq;
+    }
+
     /**
      * Authenticates with MATTR and retrieves a new JWT access token.
      *
