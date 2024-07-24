@@ -96,9 +96,15 @@ public class VerifierController {
      * @throws IOException if an I/O error occurs
      */
     @GetMapping("/qr-code")
-    public String qrCode() throws IOException {
-        requestService.createPresentation();
-        return "qr-code";
+    public String qrCode(Model model) {
+        try {
+            requestService.createPresentation();
+            return "qr-code";
+        } catch (IOException e) {
+            logger.error("Error creating presentation", e);
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
     }
 
     /**
