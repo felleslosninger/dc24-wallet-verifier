@@ -29,19 +29,27 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build Docker image
+        run: |
+          docker build --tag my-app:latest .
+        env:
+          MATTR_CLIENT_SECRET: ${{ secrets.MATTR_CLIENT_SECRET }}
+          MATTR_CLIENT_ID: ${{ secrets.MATTR_CLIENT_ID }}
+          MATTR_DOMAIN: ${{ secrets.MATTR_DOMAIN }}
+          MATTR_ISSUER_DID: ${{ secrets.MATTR_ISSUER_DID }}
+          MATTR_TENANT_URL: ${{ secrets.MATTR_TENANT_URL }}
+          MATTR_VERIFIER_DID: ${{ secrets.MATTR_VERIFIER_DID }}
 
       - name: Setup Flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy with Flyctl
-        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           MATTR_CLIENT_SECRET: ${{ secrets.MATTR_CLIENT_SECRET }}
-          MATTR_CLIENT_ID: 'GAzkUGEWppv9Pxeo7rnVZplIgzmYAuAJ'
-          MATTR_DOMAIN: 'karsten-friis-dyttcc.vii.au01.mattr.global'
-          MATTR_ISSUER_DID: 'did:web:karsten-friis-dyttcc.vii.au01.mattr.global'
-          MATTR_TENANT_URL: 'https://karsten-friis-dyttcc.vii.au01.mattr.global'
-          MATTR_VERIFIER_DID: 'did:web:karsten-friis-dyttcc.vii.au01.mattr.global'
+          MATTR_CLIENT_ID: ${{ secrets.MATTR_CLIENT_ID }}
+          MATTR_DOMAIN: ${{ secrets.MATTR_DOMAIN }}
+          MATTR_ISSUER_DID: ${{ secrets.MATTR_ISSUER_DID }}
+          MATTR_TENANT_URL: ${{ secrets.MATTR_TENANT_URL }}
+          MATTR_VERIFIER_DID: ${{ secrets.MATTR_VERIFIER_DID }}
+        run: flyctl deploy --remote-only
