@@ -1,104 +1,188 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #ffffff;
-    color: #333;
+    padding: 40px; /* Økt padding for mer plass rundt innholdet */
+    background-color: #F0F2F5;
+    color: #1E2B3C;
     transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Sentrerer barn-elementer horisontalt */
+    justify-content: center; /* Sentrerer barn-elementer vertikalt */
 }
+
 .container {
-    max-width: 600px;
-    margin: auto;
-    background: #fff;
+    width: 90%;
+    margin: 20px auto; /* Sikrer sentrering og legger til vertikal margin */
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    border-radius: 8px;
+    background: #FFFFFF;
 }
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: calc(100% - 40px); /* Justerer bredde for å unngå å berøre kantene */
+        padding: 0 10px;
+        margin: 20px 20px; /* Øker side-margins for å unngå å berøre kantene */
+    }
+}
+
+
 h1 {
-    color: #699460;
+    color: #0062B8; /* Mørk blå */
     text-align: center;
+    margin-bottom: 30px; /* Økt avstand under overskriften */
 }
-p {
+
+.attribute {
+    background-color: #F5F5F5; /* Lys grå */
+    border-left: 4px solid #0062B8; /* Mørk blå */
+    padding: 15px;
+    margin-bottom: 20px; /* Økt avstand mellom attributtbokser */
+    border-radius: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attribute:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.attribute-header {
+    font-size: 18px;
+    color: #0062B8; /* Mørk blå for header */
+    margin-bottom: 10px; /* Avstand under header */
+    font-weight: bold;
+}
+
+.attribute-content p {
     font-size: 16px;
     line-height: 1.6;
+    margin: 5px 0; /* Avstand mellom linjer */
 }
-strong {
-    color: #699460;
-}
-.attribute {
-    background-color: #e8f5e9;
-    border-left: 4px solid #699460;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    transition: transform 0.3s ease;
-}
-.attribute:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-.attribute-header {
-    font-size: 20px; 
-    text-align: center;
-}
+
 .action-button {
     display: block;
     width: max-content;
     margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #699460;
+    padding: 12px 24px;
+    background-color: #1E98F5; /* Blå */
     color: #ffffff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
     transition: background-color 0.3s ease;
 }
+
 .action-button:hover {
-    background-color: #577a4d;
+    background-color: #1667A1; /* En mørkere nyanse av blå for hover */
 }
 
 /* Stil for knappen som aktiverer mørk modus */
 .dark-mode-toggle {
-    position: fixed; 
-    top: 10px; 
-    right: 10px; 
+    position: fixed;
+    top: 10px;
+    right: 10px;
     padding: 10px 15px;
-    background-color: #699460;
-    color: #fff; 
-    border: none; 
-    border-radius: 10px; 
-    cursor: pointer; 
-    font-size: 16px; 
+    background-color: #C2132C; /* Rød */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dark-mode-toggle:hover {
-    background-color: #7daa74; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    background-color: #A10F1A; /* En mørkere rød for hover */
 }
 
-/* Dark mode stiler */
+/* Stiler for nettsiden i mørk modus */
 .dark-mode {
-    background-color: #333;
-    color: #fff;
+    background-color: #1E2B3C; /* Blåsvart for mørk modus */
+    color: #F0F2F5; /* Lysere grå for kontrast */
 }
+
 .dark-mode .container {
-    background-color: #444;
+    background-color: #2C3E50; /* Mørkere bakgrunn for container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Mørkere skygge for dybde */
 }
-.dark-mode .attribute {
-    background-color: #555;
-    border-left-color: #999;
-}
+
 .dark-mode h1 {
-    color: #aad576;
+    color: #F0F2F5; /* Lysere gråblå for h1 */
 }
-.dark-mode strong {
-    color: #aad576;
+
+.dark-mode .attribute {
+    background-color: #34495E; /* Mørkere bakgrunn for attributt i mørk modus */
+    border-left: 4px solid #0062B8; /* Mørk blå for venstrekant */
 }
+
+.dark-mode .attribute-header {
+    color: #F0F2F5; /* Hvit for header i mørk modus */
+}
+
+.dark-mode .attribute-content p {
+    color: #F0F2F5; /* Lysere grå for bedre lesbarhet */
+}
+
 .dark-mode .action-button {
-    background-color: #aad576;
-    color: #333; 
-}
-.dark-mode .action-button:hover {
-    background-color: #8dbb64;
+    background-color: #0062B8; /* Mørk blå for knapper i mørk modus */
     color: #fff;
 }
+
+.dark-mode .action-button:hover {
+    background-color: #004A8F; /* En mørkere nyanse av blå for hover */
+}
+
+/* Stil for tilbakeknappen */
+.back-button {
+    position: fixed;
+    top: 10px;
+    left: 10px; /* Plassert på venstre side */
+    padding: 10px 15px;
+    background-color: #C2132C; /* Rød */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #A10D24; /* Mørkere rød for hover-effekt */
+}
+
+/* Sørger for at .back-button beholder sin røde farge i mørk modus */
+.dark-mode .back-button, .dark-mode .back-button:hover {
+    background-color: #C2132C; /* Rød */
+    color: #fff;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin-right: 20px; /* Juster etter behov */
+}
+
+nav a {
+    text-decoration: none;
+    color: #000; /* Endre farge etter behov */
+}
+
+
