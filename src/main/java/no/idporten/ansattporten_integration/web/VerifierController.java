@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.server.WebSession;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
+
 
 import java.util.Map;
 
 import java.io.IOException;
 
-/**
- * Controller for handling verification-related requests.
- */
 @Controller
 public class VerifierController {
 
@@ -49,8 +48,8 @@ public class VerifierController {
      * @return the name of the view to render
      */
     @GetMapping("/")
-    public String index(WebSession session){
-        logger.info("Session ID: " + session.getId());
+    public String index(HttpServletRequest request){
+        logger.info("Session ID in index: " + request.getSession().getId());
         return "index";
     }
 
@@ -62,17 +61,22 @@ public class VerifierController {
      * @return the name of the view to render
      */
     @GetMapping("/presentation-view")
-    public String presentation(Model model, WebSession session) {
+    public String presentation(HttpServletRequest request, Model model) {
 
-        // logger.info("challengeId: " + session.getAttribute("challengeId"));
-        // logger.info("claims: " + session.getAttribute("claims"));
-        // logger.info("verified: " + session.getAttribute("verified"));
-        // logger.info("holder: " + session.getAttribute("holder"));
+        HttpSession session = request.getSession();
 
-        model.addAttribute("challengeId", session.getAttribute("challengeId"));
+        logger.info("Session ID in /presentation-view: " + session.getId());
+        logger.info("Session data for claims in /presentation-view:{}", session.getAttribute("claims"));
+
+
+        //OBS: If want to use HTTPSession and you're sending a mock request from Postman, you need to set the sessionID in the cookies header
+        // model.addAttribute("claims", session.getAttribute("claims"));
+        // model.addAttribute("verified", session.getAttribute("verified"));
+
+        //Alternatively we can use the instance variables presClaims and presVerified for testing instead of session attributes.
         model.addAttribute("claims", presClaims);
         model.addAttribute("verified", presVerified);
-        model.addAttribute("holder", session.getAttribute("holder"));
+
         return "presentation-view";
     }
 
@@ -84,7 +88,7 @@ public class VerifierController {
      */
     @GetMapping("/verification-status")
     @ResponseBody
-    public boolean checkVerificationStatus(WebSession session) {
+    public boolean checkVerificationStatus() {
         Boolean verified = hasReceivedVP;
         return verified;
     }
@@ -110,16 +114,10 @@ public class VerifierController {
      * @return a ResponseEntity indicating the result of the request
      */
     @PostMapping("/callback")
-    public ResponseEntity<?> receivePresentation(WebSession session, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
+    public ResponseEntity<?> receivePresentation(HttpServletRequest request, Model model, @RequestBody VerifiablePresentation verifiablePresentation) {
         try{
             logger.info("Received presentation callback");
-            //logger.info("Session ID: " + session.getId());
             String responseData = "Hello from verifier";
-            
-            session.getAttributes().put("challengeId", verifiablePresentation.getChallengeId());
-            session.getAttributes().put("claims", verifiablePresentation.getClaims().getClaimDetails());
-            session.getAttributes().put("verified", verifiablePresentation.getVerified());
-            session.getAttributes().put("holder", verifiablePresentation.getHolder());
 
             presClaims = verifiablePresentation.getClaims().getClaimDetails();
             presVerified = verifiablePresentation.getVerified(); 
@@ -127,10 +125,15 @@ public class VerifierController {
             logger.info("presClaims: " + presClaims);
             logger.info("presVerified: " + presVerified);
 
+            HttpSession session = request.getSession();
+
+            session.setAttribute("claims", presClaims);
+            session.setAttribute("verified", presVerified);
+            logger.info("Session ID in /callback: " + request.getSession().getId());
+            logger.info("Session data for claims in /callback:" + session.getAttribute("claims"));
             // Indicate that the presentation was received successfully
-            session.getAttributes().put("presentationReceived", true);
+            // session.getAttributes().put("presentationReceived", true);
             hasReceivedVP = true;
-            logger.info(session.getAttribute("presentationReceived").toString());
             return ResponseEntity.ok(responseData);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());

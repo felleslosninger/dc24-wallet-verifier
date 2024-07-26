@@ -2,10 +2,9 @@ package no.idporten.ansattporten_integration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
-/**
- * Main application class for the Verifier application.
- */
+@EnableCaching
 @SpringBootApplication
 public class VerifierApplication {
 
