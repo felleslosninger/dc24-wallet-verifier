@@ -67,8 +67,16 @@ public class VerifierController {
 
         logger.info("Session ID in /presentation-view: " + session.getId());
         logger.info("Session data for claims in /presentation-view:{}", session.getAttribute("claims"));
-        model.addAttribute("claims", session.getAttribute("claims"));
+
+
+        //OBS: If want to use HTTPSession and you're sending a mock request from Postman, you need to set the sessionID in the cookies header
+        // model.addAttribute("claims", session.getAttribute("claims"));
+        // model.addAttribute("verified", session.getAttribute("verified"));
+
+        //Alternatively we can use the instance variables presClaims and presVerified for testing instead of session attributes.
+        model.addAttribute("claims", presClaims);
         model.addAttribute("verified", presVerified);
+
         return "presentation-view";
     }
 
@@ -120,6 +128,7 @@ public class VerifierController {
             HttpSession session = request.getSession();
 
             session.setAttribute("claims", presClaims);
+            session.setAttribute("verified", presVerified);
             logger.info("Session ID in /callback: " + request.getSession().getId());
             logger.info("Session data for claims in /callback:" + session.getAttribute("claims"));
             // Indicate that the presentation was received successfully
