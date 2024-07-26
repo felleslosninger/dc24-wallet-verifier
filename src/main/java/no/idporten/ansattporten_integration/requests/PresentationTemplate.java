@@ -70,7 +70,7 @@ public class PresentationTemplate {
 
             Map<String, Object> credentialSubject = new HashMap<>();
             credentialSubject.put("@explicit", true);
-            credentialSubject.put("sub", new HashMap<>()); // Change these later
+            //credentialSubject.put("sub", new HashMap<>()); // Change these later
             credentialSubject.put("pid", new HashMap<>()); // Change these later
 
             Map<String, Object> frame = new HashMap<>();
