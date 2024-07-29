@@ -47,7 +47,15 @@ public class PresentationRequest {
 
             // Convert the response to a JSON object to extract the didcommURI
             JSONObject jsonObject = new JSONObject(jsonResponse); // Convert to json to extract access_token
-            return(jsonObject.getString("didcommUri"));
+            log.info("Response JSON: {}", jsonObject);
+
+            // Check if the key "didcommUri" exists
+            if (jsonObject.has("didcommUri")) {
+                return jsonObject.getString("didcommUri");
+            } else {
+                log.error("Key 'didcommUri' not found in the response JSON");
+                return "";
+            }
         } catch (Exception e) {
             log.error("Error creating presentation request", e);
             return "";

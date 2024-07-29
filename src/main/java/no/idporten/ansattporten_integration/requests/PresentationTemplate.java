@@ -109,7 +109,15 @@ public class PresentationTemplate {
 
             // Convert the response to a JSON object to extract the template ID
             JSONObject jsonObject = new JSONObject(jsonResponse); // Convert to json to extract access_token
-            return(jsonObject.getString("id"));
+            log.info("Response JSON: {}", jsonObject);
+
+            // Check if the key "id" exists
+            if (jsonObject.has("id")) {
+                return jsonObject.getString("id");
+            } else {
+                log.error("Key 'id' not found in the response JSON");
+                return "";
+            }
         } catch (Exception e) {
             log.error("An error occurred while creating a new presentation template", e);
             return "";
