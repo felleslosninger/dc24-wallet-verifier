@@ -1,8 +1,11 @@
 package no.idporten.ansattporten_integration.requests;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import no.idporten.ansattporten_integration.util.SendRequest;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +23,15 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class PresentationTemplate {
     static String requestURL = "/v2/credentials/web-semantic/presentations/templates";
-
     static LocalDateTime currentDateTime = LocalDateTime.now();
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     static String timestamp = currentDateTime.format(formatter);
     static String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
 
-    // Private constructor to hide the public one.
+    /**
+     * Private constructor to hide the public one.
+     */
     private PresentationTemplate () {
-
     }
 
     /**
@@ -59,11 +62,9 @@ public class PresentationTemplate {
 
             // --------- All these go into the 'frame' hashmap, which goes into the  credentialQuery just above
             List<String> type = new ArrayList<>();
-            //type.add("VerifiableCredential");
             type.add("AnsattportenCredential"); // Only accepts ansattporten credentials
 
             List<String> context = new ArrayList<>();
-            //context.add("https://schema.org");
             context.add("https://www.w3.org/2018/credentials/v1");
             context.add("https://w3id.org/vc-revocation-list-2020/v1");
             context.add("https://mattr.global/contexts/vc-extensions/v2");
