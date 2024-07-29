@@ -15,9 +15,10 @@ import java.nio.file.Path;
  */
 public class GenerateQRCode {
 
-    // Private constructor to hide the public one.
+    /**
+     * Private constructor to hide the public one.
+     */
     private GenerateQRCode () {
-
     }
 
     /**
