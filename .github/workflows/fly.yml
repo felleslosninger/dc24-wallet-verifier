@@ -2,15 +2,36 @@ name: Fly Deploy
 on:
   push:
     branches:
-      - main    
+      - "main"
+      - "fly_deployment"
+  pull_request:
+    branches:
+      - "main"
+      - "fly_deployment"
+
 jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
     concurrency: deploy-group    # optional: ensure only one action runs at a time
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: |
+          cat <<EOF > src/main/resources/.env
+          MATTR_TENANT_URL=""
+          MATTR_CLIENT_ID=""
+          MATTR_CLIENT_SECRET=""
+          MATTR_DOMAIN=""
+          MATTR_ISSUER_DID=""
+          MATTR_VERIFIER_DID=""
+          EOF
+
+      - name: Echo .env file (for debugging purposes)
+        run: cat src/main/resources/.env
 
       - name: Set up JDK 21
         uses: actions/setup-java@v3
@@ -20,7 +41,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
 
       - name: Setup Flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
@@ -29,9 +50,3 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          MATTR_CLIENT_SECRET: ${{ secrets.MATTR_CLIENT_SECRET }}
-          MATTR_CLIENT_ID: 'GAzkUGEWppv9Pxeo7rnVZplIgzmYAuAJ'
-          MATTR_DOMAIN: 'karsten-friis-dyttcc.vii.au01.mattr.global'
-          MATTR_ISSUER_DID: 'did:web:karsten-friis-dyttcc.vii.au01.mattr.global'
-          MATTR_TENANT_URL: 'https://karsten-friis-dyttcc.vii.au01.mattr.global'
-          MATTR_VERIFIER_DID: 'did:web:karsten-friis-dyttcc.vii.au01.mattr.global'
