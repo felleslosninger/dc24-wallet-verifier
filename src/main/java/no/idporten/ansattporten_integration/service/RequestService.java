@@ -1,14 +1,17 @@
 package no.idporten.ansattporten_integration.service;
 
+import no.idporten.ansattporten_integration.requests.PresentationRequest;
+import no.idporten.ansattporten_integration.requests.PresentationTemplate;
+import no.idporten.ansattporten_integration.util.GenerateQRCode;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.zxing.WriterException;
+
 import lombok.extern.slf4j.Slf4j;
-import no.idporten.ansattporten_integration.requests.PresentationRequest;
-import no.idporten.ansattporten_integration.requests.PresentationTemplate;
-import no.idporten.ansattporten_integration.util.GenerateQRCode;
+
 import org.apache.hc.client5.http.fluent.Request;
 import org.apache.hc.core5.http.ContentType;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +27,6 @@ import java.util.Date;
 @Service
 @Slf4j
 public class RequestService {
-
     private static final String NO_ACCESS_TOKEN_FOUND = "No access token found";
 
     private final String tenantURL;
