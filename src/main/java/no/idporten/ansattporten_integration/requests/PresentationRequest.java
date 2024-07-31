@@ -38,7 +38,7 @@ public class PresentationRequest {
             map.put("challenge", "GW8FGrP6j4Frl37yQZIM6a");
             map.put("did", verifierDID);
             map.put("templateId", templateID);
-            map.put("callbackUrl", "https://dc24-wallet-verifier-hei.fly.dev/callback");
+            map.put("callbackUrl", "https://dc24-wallet-verifier.fly.dev/callback");
             // map.put("callbackUrl", "https://simplewebapp-llq9.onrender.com/callback");
 
             // Convert the map to a JSON String
