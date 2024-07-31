@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,7 +45,6 @@ public class VerifiablePresentation {
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Claims {
-
         private final Map<String, String> claimDetails = new HashMap<>();
 
         /**
@@ -69,5 +69,3 @@ public class VerifiablePresentation {
         }
     }
 }
-
-

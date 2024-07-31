@@ -13,7 +13,6 @@ import java.net.http.HttpResponse;
  * Utility class for sending HTTP requests.
  */
 public class SendRequest {
-
     private static final Logger log = LoggerFactory.getLogger(SendRequest.class);
 
     // Create a single instance of HttpCLient to reuse it
@@ -40,7 +39,6 @@ public class SendRequest {
                     .build();
 
             // Create an HTTP client and send the request
-
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             // Get the response body
@@ -51,7 +49,6 @@ public class SendRequest {
                 Thread.currentThread().interrupt();
             }
         }
-
         return responseMsg; // Returns empty string if an error occurs
     }
 }
