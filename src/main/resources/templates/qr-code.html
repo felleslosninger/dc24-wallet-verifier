@@ -5,21 +5,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/qr.css}"/>
 	<script th:src="@{/js/qr.js}" defer></script>
-	<script>
+	<script th:inLine="javascript">
+
+		document.addEventListener("DOMContentLoaded", function() {
+			pollGetRequest();
+		});
+
 		function pollGetRequest() {
-			fetch('https://verifier-backend.eudiw.dev/ui/presentations/')
+			var tx_code = /*[[${presentation_id}]]*/ 'defaultCode';
+			console.log(tx_code);
+			fetch('https://verifier-backend.eudiw.dev/ui/presentations/' + tx_code)
 				.then(response => {
 					if (response.status === 200) {
+						window.location.href = '/presentation-view';
 						return response.json();
 					} else {
 						throw new Error('Response not 200');
-					}
-				})
-				.then(data => {
-					if (data === true) { // Use strict equality for comparison
-						window.location.href = '/presentation-view';
-					} else {
-						setTimeout(pollGetRequest, 2000); // Poll every 2 seconds
 					}
 				})
 				.catch(error => {
@@ -42,6 +43,7 @@
 	<main>
 		<section class="container">
             <h1>Scan QR-kode</h1>
+			<h1 th:text="${transactionToken}"></h1>
             <h4><img th:src="${qrCode}"></img></h4>
 			<div id="loading-dot"></div>
 		</section>

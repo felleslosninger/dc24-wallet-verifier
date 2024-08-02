@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    pollGetRequest();
     const darkModeToggle = document.querySelector('.dark-mode-toggle');
     darkModeToggle.addEventListener('click', toggleDarkMode);
 
@@ -20,16 +19,4 @@ function updateTheme(theme) {
     button.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
     button.setAttribute('aria-pressed', isDarkMode.toString());
     localStorage.setItem('theme', theme);
-}
-
-function pollGetRequest() {
-    fetch('/verification-status')
-        .then(response => response.json())
-        .then(data => {
-            if (data === true) { // Use strict equality for comparison
-                window.location.href = '/presentation-view';
-            } else {
-                setTimeout(pollForVerification, 2000); // Poll every 2 seconds
-            }
-        });
 }

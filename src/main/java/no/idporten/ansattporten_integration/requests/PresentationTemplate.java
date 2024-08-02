@@ -30,7 +30,7 @@ public class PresentationTemplate {
     static String timestamp = currentDateTime.format(formatter);
     static String uniqueTemplateId = "Ansattporten-Selective-Presentation-" + timestamp;
 
-    public static String createPresentationTemplate(String apiURL) {
+    public static String[] createPresentationTemplate(String apiURL) {
         try {
             
             RequestData requestData = new RequestData();
@@ -101,14 +101,16 @@ public class PresentationTemplate {
             log.info("Response JSON: {}", jsonObject);
 
             if (jsonObject.has("request_uri")) {
-                return jsonObject.getString("request_uri");
+                String[] strings = {jsonObject.getString("request_uri"), jsonObject.getString("presentation_id")};
+                return strings;
+
             } else {
                 log.error("Key 'request_uri' not found in the response JSON");
-                return "";
+                return new String[0];
             }
         } catch (Exception e) {
             log.error("An error occurred while creating a new presentation template", e);
-            return "";
+            return new String[0];
         }
     }
 

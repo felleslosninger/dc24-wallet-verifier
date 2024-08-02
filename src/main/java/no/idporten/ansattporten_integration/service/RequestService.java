@@ -25,7 +25,7 @@ public class RequestService {
         this.apiURL = apiURL;
     }
     
-    public String sendPresentationRequest() {
+    public String[] sendPresentationRequest() {
 
         return PresentationTemplate.createPresentationTemplate(apiURL);
 

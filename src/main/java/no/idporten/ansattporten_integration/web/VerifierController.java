@@ -97,14 +97,10 @@ public class VerifierController {
     @GetMapping("/qr-code")
     public String qrCode(Model model) throws IOException {
 
-        String request_uri = requestService.sendPresentationRequest();
+        String[] responseArray = requestService.sendPresentationRequest();
 
-        String[] url_parts = request_uri.split("/");
-        String transaction_token = url_parts[url_parts.length - 1];
-        logger.info("Transaction token" + transaction_token);
-
-        model.addAttribute("qrCode", QrCodeGenerator.makeQR(request_uri));
-        model.addAttribute("transactionToken", transaction_token);
+        model.addAttribute("qrCode", QrCodeGenerator.makeQR(responseArray[0]));
+        model.addAttribute("presentation_id", responseArray[1]);
 
         return "qr-code";
     }
