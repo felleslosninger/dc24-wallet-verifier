@@ -5,6 +5,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/qr.css}"/>
 	<script th:src="@{/js/qr.js}" defer></script>
+	<script>
+		function pollGetRequest() {
+			fetch('https://verifier-backend.eudiw.dev/ui/presentations/')
+				.then(response => {
+					if (response.status === 200) {
+						return response.json();
+					} else {
+						throw new Error('Response not 200');
+					}
+				})
+				.then(data => {
+					if (data === true) { // Use strict equality for comparison
+						window.location.href = '/presentation-view';
+					} else {
+						setTimeout(pollGetRequest, 2000); // Poll every 2 seconds
+					}
+				})
+				.catch(error => {
+					console.log(error);
+					setTimeout(pollGetRequest, 2000); // Poll every 2 seconds on error
+				});
+		}
+	</script>
 	<title>qrCode</title>
 </head>
 <body>

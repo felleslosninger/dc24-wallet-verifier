@@ -1,6 +1,7 @@
 package no.idporten.ansattporten_integration.web;
 
 import no.idporten.ansattporten_integration.service.RequestService;
+import no.idporten.ansattporten_integration.util.QrCodeGenerator;
 import no.idporten.ansattporten_integration.model.VerifiablePresentation;
 
 import org.slf4j.Logger;
@@ -95,7 +96,16 @@ public class VerifierController {
      */
     @GetMapping("/qr-code")
     public String qrCode(Model model) throws IOException {
-        model.addAttribute("qrCode", requestService.getQR());
+
+        String request_uri = requestService.sendPresentationRequest();
+
+        String[] url_parts = request_uri.split("/");
+        String transaction_token = url_parts[url_parts.length - 1];
+        logger.info("Transaction token" + transaction_token);
+
+        model.addAttribute("qrCode", QrCodeGenerator.makeQR(request_uri));
+        model.addAttribute("transactionToken", transaction_token);
+
         return "qr-code";
     }
 

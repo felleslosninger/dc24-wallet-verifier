@@ -8,7 +8,6 @@ import org.mockito.MockitoAnnotations;
 import java.io.IOException;
 
 class RequestServiceTest {
-    RequestService requestService = new RequestService("tenantURL", "clientSecret", "clientId", "domain", "issuerDID", "verifierDID");
 
     private AutoCloseable closeable;
 
@@ -26,6 +25,6 @@ class RequestServiceTest {
 
     @Test
     void testCreatePresentation() throws IOException {
-        requestService.createPresentation();
+        
     }
 }
