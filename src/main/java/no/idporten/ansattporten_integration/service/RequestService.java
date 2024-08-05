@@ -21,7 +21,7 @@ public class RequestService {
 
     private final String apiURL;
 
-    public RequestService(@Value("${EU_API_URL}") String apiURL) {
+    public RequestService(@Value("https://verifier-backend.eudiw.dev") String apiURL) {
         this.apiURL = apiURL;
     }
     
