@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for dc24-wallet-verifier-eu on 2024-08-05T09:29:25+02:00
+# fly.toml app configuration file generated for dc24-wallet-eu-verifier on 2024-08-05T09:41:44+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'dc24-wallet-verifier-eu'
+app = 'dc24-wallet-eu-verifier'
 primary_region = 'ams'
 
 [build]
