@@ -20,12 +20,7 @@ jobs:
       - name: Create .env file
         run: |
           cat <<EOF > src/main/resources/.env
-          MATTR_TENANT_URL=""
-          MATTR_CLIENT_ID=""
-          MATTR_CLIENT_SECRET=""
-          MATTR_DOMAIN=""
-          MATTR_ISSUER_DID=""
-          MATTR_VERIFIER_DID=""
+          EU_API_URL="https://verifier-backend.eudiw.dev"
           EOF
 
       - name: Echo .env file (for debugging purposes)
