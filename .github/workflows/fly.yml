@@ -2,12 +2,10 @@ name: Fly Deploy
 on:
   push:
     branches:
-      - "main"
-      - "fly_deployment"
+      - "eu-verifier-poc"
   pull_request:
     branches:
-      - "main"
-      - "fly_deployment"
+      - "eu-verifier-poc"
 
 jobs:
   deploy:

@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/qr.css}"/>
 	<script th:src="@{/js/qr.js}" defer></script>
-	<script th:inLine="javascript">
+	<script th:inline="javascript">
 
 		document.addEventListener("DOMContentLoaded", function() {
 			pollGetRequest();
@@ -13,20 +13,47 @@
 
 		function pollGetRequest() {
 			var tx_code = /*[[${presentation_id}]]*/ 'defaultCode';
-			console.log(tx_code);
 			fetch('https://verifier-backend.eudiw.dev/ui/presentations/' + tx_code)
 				.then(response => {
 					if (response.status === 200) {
-						window.location.href = '/presentation-view';
 						return response.json();
 					} else {
 						throw new Error('Response not 200');
 					}
 				})
+				.then(data => {
+					console.log('Received data:', data);
+					sendCbor(JSON.stringify(data));
+				})
 				.catch(error => {
 					console.log(error);
 					setTimeout(pollGetRequest, 2000); // Poll every 2 seconds on error
 				});
+		}
+
+		// Recieves data already converted to json
+		function sendCbor(data) {
+			console.log(data)
+			fetch("/cbor", {
+			  	method: "POST",
+			  	body: data,
+			  	headers: {
+					"Content-type": "application/json; charset=UTF-8"
+			  	}
+			})
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error('Network response was not 200');
+				}
+			})
+			.then((json) => {
+				window.location.href = '/presentation-view';
+			})
+			.catch((error) => {
+				console.error('There was a problem with the fetch operation:', error);
+			});
 		}
 	</script>
 	<title>qrCode</title>

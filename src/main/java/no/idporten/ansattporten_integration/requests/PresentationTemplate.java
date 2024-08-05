@@ -2,11 +2,8 @@ package no.idporten.ansattporten_integration.requests;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,7 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import no.idporten.ansattporten_integration.model.RequestData;
 import no.idporten.ansattporten_integration.util.NonceGenerator;
 import no.idporten.ansattporten_integration.util.SendRequest;
-import no.idporten.ansattporten_integration.web.VerifierController;
 
 public class PresentationTemplate {
 
@@ -94,7 +90,7 @@ public class PresentationTemplate {
             String jsonString = objectMapper.writeValueAsString(requestData);
 
             SendRequest sendRequest = new SendRequest();
-            String jsonResponse = sendRequest.sendRequest(jsonString, apiURL + requestURL);
+            String jsonResponse = sendRequest.sendPostRequest(jsonString, apiURL + requestURL);
 
             // Convert the response to a JSON object to extract the request_uri
             JSONObject jsonObject = new JSONObject(jsonResponse); // Convert to json to extract access_token

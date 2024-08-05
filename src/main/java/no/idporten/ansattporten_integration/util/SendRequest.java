@@ -18,7 +18,7 @@ public class SendRequest {
     // Create a single instance of HttpCLient to reuse it
     private static final HttpClient client = HttpClient.newHttpClient();
 
-    public String sendRequest(String jsonString, String url) {
+    public String sendPostRequest(String jsonString, String url) {
         String responseMsg = "";
 
         try {
@@ -29,11 +29,35 @@ public class SendRequest {
                     .header("Content-Type", "application/json")
                     .build();
 
-            // Create an HTTP client and send the request
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            // Get the response body
             responseMsg = response.body();
+        } catch (IOException | InterruptedException e) {
+            log.error("Error occurred while sending HTTP request", e);
+            if (e instanceof InterruptedException) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        return responseMsg; // Returns empty string if an error occurs
+    }
+
+    public String sendGetRequest(String url) {
+        String responseMsg = "";
+
+        System.out.println("REQ: ");
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .build();
+
+            System.out.println("REQ: 111111111111111");
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("REQ: 22222222222222222");
+            responseMsg = response.body();
+            System.out.println(response);
         } catch (IOException | InterruptedException e) {
             log.error("Error occurred while sending HTTP request", e);
             if (e instanceof InterruptedException) {
