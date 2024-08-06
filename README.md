@@ -39,11 +39,11 @@ sequenceDiagram
 
     UA->>VE: Trigger request 
 
-    VE->>VE: Create Presentation Template
+    VE->>V: Create Presentation Template
+    V->>VE: Return Template ID
     VE->>+V: Send Presentation Request
     V->>+VE: Return URI
     VE->>VE: Generate QR code
-    V->>+VE: Respond with QR code
 
     VE->>+UA: Display QR code
     UA->>W: Scan QR code and trigger wallet
