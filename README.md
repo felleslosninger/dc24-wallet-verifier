@@ -1,18 +1,14 @@
-# MATTR Verifier
-This is a simple application that demonstrates how a credential verifier would be able to request and recieve the credential of a user, using the MATTR API.
+# EU Verifier
+This is a simple application that demonstrates how a credential verifier would be able to request and recieve the credential of a user, using the [EU Verifier API](https://verifier.eudiw.dev/home).
 
-The application creates a `Request Template`, detailing what information the verifier needs from the user in order to function properly. 
-Using that template, the verifier creates a `Presentation Request` which is converted to a QR code for the user to scan with their MATTR Showcase Wallet. 
-The `Presentation Request` contains a callback URL which MATTR uses to send the credential to the verifier.
-By hosting the application on `fly.io`, the verifier is able recieve credentials from MATTR, which is then displayed to the user.
+The application creates and sends a `Request Template`, asking for all claims in the users EU credential (This has only been tested with the sample ID in the EU Wallet). 
+The URI in the response from the API is then converted to a QR code for the user to scan with their EU Demo Wallet. 
+By hosting the application on `fly.io`, the verifier is able recieve credentials from the EU Wallet, which is then displayed to the user.
 
-The requested claims in the `Request Template` is based on the claims our [Issuer](https://github.com/felleslosninger/dc24-eu-wallet) recieves from Ansattporten.
 For details on hosting the verifier on `fly.io`, see [our explanation](https://github.com/felleslosninger/dc24-wallet-verifier/?tab=readme-ov-file#flyio-setup) as well as their [official documentation](https://fly.io/docs/getting-started/).
   
 ## To run application
 Copy the `.env.example` file, and then rename it to `.env`. Change the secrets in the `.env` file to your values.
-
-The MATTR secrets can be obtained by requesting access to their API and following their [guide](https://learn.mattr.global/guides/) for setting up a verifier, as well as their [API documentation](https://learn.mattr.global/api-reference/).
 
 ## Fly.io Setup
 - If you haven't already installed fly on your computer run the following command in your terminal:
@@ -33,23 +29,23 @@ The MATTR secrets can be obtained by requesting access to their API and followin
 ```mermaid
 sequenceDiagram    
     participant UA as User Agent
-    participant W as Wallet
-    participant VE as Verifier Endpoints
-    participant V as Verifier
+    participant W as EU Wallet
+    participant VE as Verifier
+    participant V as EU API
 
-    UA->>VE: Trigger presentation 
+    UA->>VE: Trigger request 
     
-    VE->>+V: Request QR code
-    V->>V: Generate QR code
+    VE->>+V: Initialize Transaction
+    V->>+VE: Return URI
+    VE->>VE: Generate QR code
     V->>+VE: Respond with QR code
 
     VE->>+UA: Display QR code
     UA->>W: Scan QR code and trigger wallet
 
     W->>+V: Send POST request
-    V->>V: Update verification status
     V->>VE: Redirect if verified
-    VE->>UA: Render wallet response 
+    VE->>UA: Display Credential Info 
 ```
 
 
