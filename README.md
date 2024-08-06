@@ -33,14 +33,16 @@ The MATTR secrets can be obtained by requesting access to their API and followin
 ```mermaid
 sequenceDiagram    
     participant UA as User Agent
-    participant W as Wallet
-    participant VE as Verifier Endpoints
-    participant V as Verifier
+    participant W as MATTR Wallet
+    participant VE as Verifier
+    participant V as MATTR API
 
-    UA->>VE: Trigger presentation 
-    
-    VE->>+V: Request QR code
-    V->>V: Generate QR code
+    UA->>VE: Trigger request 
+
+    VE->>VE: Create Presentation Template
+    VE->>+V: Send Presentation Request
+    V->>+VE: Return URI
+    VE->>VE: Generate QR code
     V->>+VE: Respond with QR code
 
     VE->>+UA: Display QR code
@@ -49,7 +51,7 @@ sequenceDiagram
     W->>+V: Send POST request
     V->>V: Update verification status
     V->>VE: Redirect if verified
-    VE->>UA: Render wallet response 
+    VE->>UA: Render Credential Info 
 ```
 
 
