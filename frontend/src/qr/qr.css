@@ -1,0 +1,147 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #F0F2F5;
+    color: #1E2B3C;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem;
+}
+
+.app-container {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    text-align: center;
+}
+
+.container img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.container h1 {
+    color: #0062B8;
+    font-size: 24px;
+    margin: 0;
+}
+
+.container #loading-dot {
+    width: 120px;
+    height: 60px;
+    background-image: radial-gradient(circle, #0062B8 50%, transparent 50%), radial-gradient(circle, #0062B8 50%, transparent 50%), radial-gradient(circle, #0062B8 50%, transparent 50%);
+    background-size: 30px 30px;
+    background-position: 0% 50%, 50% 50%, 100% 50%;
+    background-repeat: no-repeat;
+    animation: loading 1s infinite;
+    margin: 30px auto 0;
+}
+
+@keyframes loading {
+    0%, 33.34%, 66.68%, 100% {
+        background-position: 0% 50%, 50% 50%, 100% 50%;
+    }
+    16.67% {
+        background-position: 0% 20%, 50% 50%, 100% 50%;
+    }
+    50.01% {
+        background-position: 0% 50%, 50% 20%, 100% 50%;
+    }
+    83.35% {
+        background-position: 0% 50%, 50% 50%, 100% 20%;
+    }
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    background-color: #C2132C;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #A10D24;
+}
+
+.dark-mode {
+    background-color: #1E2B3C;
+    color: #F0F2F5;
+}
+
+.dark-mode h1, .dark-mode p, .dark-mode a {
+    color: #F0F2F5;
+}
+
+.dark-mode a {
+    background-color: #0062B8;
+    color: #fff;
+}
+
+.dark-mode a:hover {
+    background-color: #004A8F;
+}
+
+.dark-mode footer {
+    color: #aaa;
+}
+
+/* Styling for the back button */
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #C2132C;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #A10D24;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+}
+
+footer {
+    margin-top: 10px;
+    text-align: center;
+    color: #1E2B3C;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 12px;
+}

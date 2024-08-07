@@ -1,0 +1,293 @@
+html {
+  height: 100%; /* Sørger for at html-elementet strekker seg til hele høyden av viewporten */
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0 20px; /* Legger til padding på sidene av body for å forhindre at innholdet strekker seg helt ut */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Endret fra center til space-between for å skyve footeren ned */
+  align-items: center;
+  min-height: 100vh; /* Sørger for at body strekker seg til minst hele høyden av viewporten */
+  background-color: #F0F2F5; /* Lysere grå for en mykere bakgrunn */
+  color: #1E2B3C; /* Blåsvart for bedre lesbarhet */
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1rem; /* Basertekststørrelse */
+}
+
+/* Stil for hovedoverskrifter */
+h1 {
+  color: #1E2B3C; /* Blåsvart for konsistens */
+  font-size: 2.0em; /* Dynamisk størrelse basert på kroppens font-størrelse */
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+/* Stil for paragrafer */
+p {
+  text-align: center;
+  margin: 1em 0;
+  font-size: 14px;
+  color: #1E2B3C; /* Blåsvart for konsistens */
+}
+
+/* Stil for lenker */
+a {
+  display: inline-block;
+  background-color: #1E98F5; /* Blå */
+  color: #ffffff;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+}
+/* Stil for lenker ved hover */
+a:hover {
+  background-color: #1667A1; /* En mørkere nyanse av blå for hover */
+}
+
+/* Stil for knappen som aktiverer mørk modus */
+.dark-mode-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px 15px;
+  background-color: #C2132C; 
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background-color: #A10D24; 
+}
+
+/* Stiler for nettsiden i mørk modus */
+.dark-mode {
+  background-color: #1E2B3C; /* Blåsvart for mørk modus */
+  color: #F0F2F5; /* Lysere grå for kontrast */
+}
+.dark-mode h1, .dark-mode p, .dark-mode a {
+  color: #F0F2F5; /* Lysere grå for kontrast */
+}
+
+.dark-mode a {
+  background-color: #0062B8; /* Mørk blå for lenker i mørk modus */
+  color: #fff;
+}
+
+.dark-mode a:hover {
+  background-color: #004A8F; /* En mørkere nyanse av blå for hover */
+}
+
+.dark-mode footer {
+  color: #aaa; /* Lysere grå for bedre lesbarhet */
+}
+
+footer {
+  margin-top: 10px; /* Skyver footeren 20px ned fra innholdet over */
+  text-align: center; /* Sentrerer tekst eller andre elementer i footeren */
+  color: #1E2B3C; /* Tekstfarge som matcher body */
+  transition: background-color 0.3s, color 0.3s; /* Overgang for mørk modus */
+  font-size: 12px; /* Spesifikk, liten skriftstørrelse */
+}
+
+/* Legger til margin-top for å flytte elementene lenger ned */
+#main-heading {
+  margin-top: 100px; /* Øker avstanden fra toppen */
+}
+
+#main-heading + p {
+  margin-top: 20px; /* Øker avstanden fra overskriften */
+}
+
+.qr-button {
+  background-color: #1E98F5; /* Blå */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.qr-button:hover {
+  background-color: #1667A1; /* En mørkere nyanse av blå for hover */
+}
+
+.cente.dark-mode h1, .dark-mode p, .dark-mode a {
+  color: #F0F2F5; /* Lysere grå for kontrast */
+}
+
+.dark-mode a {
+  background-color: #0062B8; /* Mørk blå for lenker i mørk modus */
+  color: #fff;
+}
+
+.dark-mode a:hover {
+  background-color: #004A8F; /* En mørkere nyanse av blå for hover */
+}
+
+.dark-mode footer {
+  color: #aaa; /* Lysere grå for bedre lesbarhet */
+}
+
+footer {
+  margin-top: 10px; /* Skyver footeren 20px ned fra innholdet over */
+  text-align: center; /* Sentrerer tekst eller andre elementer i footeren */
+  color: #1E2B3C; /* Tekstfarge som matcher body */
+  transition: background-color 0.3s, color 0.3s; /* Overgang for mørk modus */
+  font-size: 12px; /* Spesifikk, liten skriftstørrelse */
+}
+
+/* Legger til margin-top for å flytte elementene lenger ned */
+#main-heading {
+  margin-top: 100px; /* Øker avstanden fra toppen */
+}
+
+#main-heading + p {
+  margin-top: 20px; /* Øker avstanden fra overskriften */
+}
+
+.qr-button {
+  background-color: #1E98F5; /* Blå */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.qr-button:hover {
+  background-color: #1667A1; /* En mørkere nyanse av blå for hover */
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Start fra toppen */
+  align-items: center;
+  height: 100vh; /* Full høyde av viewport */
+  text-align: center; /* Sentrerer tekst */
+  padding-top: 100px; /* Juster denne verdien for å flytte innholdet lenger ned */
+}
+
+#main-heading {
+  margin-top: 0; /* Fjern margin-top */
+}
+
+.button-container {
+  margin-top: 20px; /* Avstand mellom overskrift og knapp */
+}
+
+.qr-button {
+  background-color: #1E98F5; /* Blå */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.qr-button:hover {
+  background-color: #1667A1; /* En mørkere nyanse av blå for hover */
+}
+
+.dark-mode h1, .dark-mode p, .dark-mode a {
+  color: #F0F2F5; /* Lysere grå for kontrast */
+}
+
+.dark-mode a {
+  background-color: #0062B8; /* Mørk blå for lenker i mørk modus */
+  color: #fff;
+}
+
+.dark-mode a:hover {
+  background-color: #004A8F; /* En mørkere nyanse av blå for hover */
+}
+
+.dark-mode footer {
+  color: #aaa; /* Lysere grå for bedre lesbarhet */
+}
+
+footer {
+  margin-top: 10px; /* Skyver footeren 20px ned fra innholdet over */
+  text-align: center; /* Sentrerer tekst eller andre elementer i footeren */
+  color: #1E2B3C; /* Tekstfarge som matcher body */
+  transition: background-color 0.3s, color 0.3s; /* Overgang for mørk modus */
+  font-size: 12px; /* Spesifikk, liten skriftstørrelse */
+}
+.dark-mode h1, .dark-mode p, .dark-mode a {
+  color: #F0F2F5; /* Lysere grå for kontrast */
+}
+
+.dark-mode a {
+  background-color: #0062B8; /* Mørk blå for lenker i mørk modus */
+  color: #fff;
+}
+
+.dark-mode a:hover {
+  background-color: #004A8F; /* En mørkere nyanse av blå for hover */
+}
+
+.dark-mode footer {
+  color: #aaa; /* Lysere grå for bedre lesbarhet */
+}
+
+footer {
+  margin-top: 10px; /* Skyver footeren 20px ned fra innholdet over */
+  text-align: center; /* Sentrerer tekst eller andre elementer i footeren */
+  color: #1E2B3C; /* Tekstfarge som matcher body */
+  transition: background-color 0.3s, color 0.3s; /* Overgang for mørk modus */
+  font-size: 12px; /* Spesifikk, liten skriftstørrelse */
+}
+
+
+#main-heading + p {
+  margin-top: 20px; /* Øker avstanden fra overskriften */
+}
+
+.qr-button {
+  background-color: #1E98F5; /* Blå */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.qr-button:hover {
+  background-color: #1667A1; /* En mørkere nyanse av blå for hover */
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Start fra toppen */
+  align-items: center;
+  height: 100vh; /* Full høyde av viewport */
+  text-align: center; /* Sentrerer tekst */
+  padding-top: 100px; /* Juster denne verdien for å flytte innholdet lenger ned */
+}
+
+#main-heading {
+  margin-top: 0; /* Fjern margin-top */
+}
+
+.button-container {
+  margin-top: 20px; /* Avstand mellom overskrift og knapp */
+}

@@ -1,0 +1,195 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 40px;
+    background-color: #F0F2F5;
+    color: #1E2B3C;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: calc(100% - 40px);
+        padding: 0 10px;
+        margin: 20px 20px;
+    }
+}
+
+h1 {
+    color: #0062B8;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 100px; /* Øker avstanden fra toppen */
+}
+
+.attribute {
+    background-color: #F5F5F5;
+    border-left: 4px solid #0062B8;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attribute:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.attribute-header {
+    font-size: 18px;
+    color: #0062B8;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.attribute-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.action-button {
+    display: block;
+    width: max-content;
+    margin: 40px auto; /* Øker avstanden fra toppen */
+    padding: 12px 24px;
+    background-color: #1E98F5;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #1667A1;
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    background-color: #C2132C;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #A10F1A;
+}
+
+.dark-mode {
+    background-color: #1E2B3C;
+    color: #F0F2F5;
+}
+
+.dark-mode .container {
+    background-color: #2C3E50;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode h1 {
+    color: #F0F2F5;
+}
+
+.dark-mode .attribute {
+    background-color: #34495E;
+    border-left: 4px solid #0062B8;
+}
+
+.dark-mode .attribute-header {
+    color: #F0F2F5;
+    margin-top: 100px; /* Øker avstanden fra toppen */
+}
+
+.dark-mode .attribute-content p {
+    color: #F0F2F5;
+    margin-top: 40px; /* Øker avstanden fra toppen */
+}
+
+.dark-mode .action-button {
+    background-color: #0062B8;
+    color: #fff;
+    margin-top: 40px; /* Øker avstanden fra toppen */
+}
+
+.dark-mode .action-button:hover {
+    background-color: #004A8F;
+}
+
+.back-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px 15px;
+    background-color: #C2132C;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #A10D24;
+}
+
+.dark-mode .back-button, .dark-mode .back-button:hover {
+    background-color: #C2132C;
+    color: #fff;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Ny stil for footeren */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}

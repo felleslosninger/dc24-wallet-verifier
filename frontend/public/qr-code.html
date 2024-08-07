@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/qr.css}"/>
+	<script th:src="@{/js/qr.js}" defer></script>
+	<title>qrCode</title>
+</head>
+<body>
+	<header>
+        <button class="dark-mode-toggle" aria-pressed="false" aria-label="Aktiver dark mode for bedre lesbarhet">Dark Mode</button>
+        <nav>
+            <ul>
+                <li><a href="javascript:history.back()" class="back-button">Tilbake</a></li>
+            </ul>		
+        </nav>
+	</header>
+	<main>
+		<section class="container">
+            <h1>Scan QR-kode</h1>
+            <h4><img th:src="${qrCode}"></img></h4>
+			<div id="loading-dot"></div>
+		</section>
+	</main>
+    <footer>
+        <p>© 2024 Digdircamp.</p>
+    </footer>
+</body>
+</html>
