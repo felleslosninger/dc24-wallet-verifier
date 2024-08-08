@@ -58,7 +58,7 @@ public class PresentationTemplate {
             Map<String, Object> credentialQuery = new HashMap<>();
             credentialQuery.put("required", true);
             credentialQuery.put("reason", "Please provide your certificate for Ansattporten");
-            credentialQuery.put("trustedIssuer", trustedIssuerList);
+            //credentialQuery.put("trustedIssuer", trustedIssuerList);
 
             // --------- All these go into the 'frame' hashmap, which goes into the  credentialQuery just above
             List<String> type = new ArrayList<>();
