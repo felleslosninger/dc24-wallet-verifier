@@ -23,10 +23,10 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class PresentationTemplate {
     static String requestURL = "/v2/credentials/web-semantic/presentations/templates";
-    static LocalDateTime currentDateTime = LocalDateTime.now();
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-    static String timestamp = currentDateTime.format(formatter);
-    static String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
+    // static LocalDateTime currentDateTime = LocalDateTime.now();
+    // static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    // static String timestamp = currentDateTime.format(formatter);
+    // static String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
 
     /**
      * Private constructor to hide the public one.
@@ -93,6 +93,12 @@ public class PresentationTemplate {
             // Create a list of queries
             List<Map<String, Object>> queryList = new ArrayList<>();
             queryList.add(queries);
+
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+            String timestamp = currentDateTime.format(formatter);
+            String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
+
 
             // Create the final request map
             Map<String, Object> map = new HashMap<>();
