@@ -1,4 +1,12 @@
 # EU Verifier
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+
 This is a simple application that demonstrates how a credential verifier would be able to request and recieve the credential of a user, using the [EU Verifier API](https://verifier.eudiw.dev/home).
 
 The application creates and sends a `Request Template`, asking for all claims in the users EU credential (This has only been tested with the sample ID in the EU Wallet). 
@@ -63,25 +71,15 @@ A default endpoint serving as the verifier's homepage, containing a button which
 - _Method_: GET
 - _URL_: http://localhost:2001/qr-code
 
-An endpoint serving the QR code stored in `/resources/static/qrCodes/`. The QR code can be scanned by the MATTR Showcase Wallet, causing a `Selective Disclosure` `Presentation` to appear in the wallet asking for credentials. In order for the verifier to request correct information, ensure that the credential details requested in the `Request Template` are present in your `Verifiable Credential`.
-
-If no QR code is present in the `qrCodes/` folder, it is generated the first time this endpoint is accessed. If the page fails to find the QR code image, relaunching the application fixes this issue, as the application struggles to access files generated while the program is running (non pre-generated files).
+An endpoint serving the QR code using an external QR code generating API. The QR code can be scanned by the MATTR Showcase Wallet, causing a `Selective Disclosure` `Presentation` to appear in the wallet asking for credentials. In order for the verifier to request correct information, ensure that the credential details requested in the `Request Template` are present in your `Verifiable Credential`.
 
 
-### Callback Endpoint
+### Presentation View Endpoint
 
 - _Method_: POST
-- _URL_: http://localhost:2001/callback
+- _URL_: http://localhost:2001/cbor
 
-An endpoint for MATTR to Post the user's credentials to. In order for MATTR to be able to access this URL it has to be included in the `Presentation Request`. When recieving a POST request, the verifier sets `hasReceivedVP` to `true`, as this would mean MATTR has been able to send a request to the callback URL.
-
-
-### Verification Status Endpoint
-
-- _Method_: GET
-- _URL_: http://localhost:2001/verification-status
-
-An endpoint which checks the status of `hasReceivedVP`, which gets updated in the [Callback Endpoint](https://github.com/felleslosninger/dc24-wallet-verifier/?tab=readme-ov-file#callback-endpoint). As the user's browser is still at the [QR Code Endpoint](https://github.com/felleslosninger/dc24-wallet-verifier/?tab=readme-ov-file#qr-code-endpoint) after scanning the QR code, the html has javascript code that polls this endpoint, checking if `hasReceivedVP` is true. If so the javascript redirects to the [Presentation View Endpoint](https://github.com/felleslosninger/dc24-wallet-verifier/?tab=readme-ov-file#presentation-view-endpoint)
+Endpoint for decoding the base64 encoded cbor response returned from the EU API. The endpoint is accessed by the [javascript in qr-code.html](https://github.com/felleslosninger/dc24-wallet-verifier/blob/eu-verifier-poc/src/main/resources/templates/qr-code.html#L35).
 
 
 ### Presentation View Endpoint
