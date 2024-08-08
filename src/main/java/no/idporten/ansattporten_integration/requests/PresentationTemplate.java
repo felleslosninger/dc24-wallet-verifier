@@ -23,10 +23,6 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class PresentationTemplate {
     static String requestURL = "/v2/credentials/web-semantic/presentations/templates";
-    // static LocalDateTime currentDateTime = LocalDateTime.now();
-    // static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-    // static String timestamp = currentDateTime.format(formatter);
-    // static String uniqueTemplateName = "Ansattporten-Selective-Presentation-" + timestamp;
 
     /**
      * Private constructor to hide the public one.
