@@ -1,4 +1,14 @@
 # MATTR Verifier
+
+## **_The EU Verifier Branch can be found [here](https://github.com/felleslosninger/dc24-wallet-verifier/tree/eu-verifier-poc)._**
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+
 This is a simple application that demonstrates how a credential verifier would be able to request and recieve the credential of a user, using the MATTR API.
 
 The application creates a `Request Template`, detailing what information the verifier needs from the user in order to function properly. 
