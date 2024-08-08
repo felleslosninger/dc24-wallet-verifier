@@ -58,10 +58,9 @@ sequenceDiagram
     VE->>+UA: Display QR code
     UA->>W: Scan QR code and trigger wallet
 
-    W->>+V: Send POST request
-    V->>V: Update verification status
-    V->>VE: Redirect if verified
-    VE->>UA: Render Credential Info 
+    W->>+VE: Send POST request
+    VE->>VE: Update verification status
+    VE->>UA: Redirect to presentation view
 ```
 
 
