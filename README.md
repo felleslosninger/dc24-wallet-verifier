@@ -1,6 +1,6 @@
 # MATTR Verifier
 
-## **_The EU Verifier Branch can be found [here](https://github.com/felleslosninger/dc24-wallet-verifier/tree/eu-verifier-poc)._**
+## **_[The EU Verifier Branch can be found here.](https://github.com/felleslosninger/dc24-wallet-verifier/tree/eu-verifier-poc)_**
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
@@ -79,9 +79,7 @@ A default endpoint serving as the verifier's homepage, containing a button which
 - _Method_: GET
 - _URL_: http://localhost:2001/qr-code
 
-An endpoint serving the QR code stored in `/resources/static/qrCodes/`. The QR code can be scanned by the MATTR Showcase Wallet, causing a `Selective Disclosure` `Presentation` to appear in the wallet asking for credentials. In order for the verifier to request correct information, ensure that the credential details requested in the `Request Template` are present in your `Verifiable Credential`.
-
-If no QR code is present in the `qrCodes/` folder, it is generated the first time this endpoint is accessed. If the page fails to find the QR code image, relaunching the application fixes this issue, as the application struggles to access files generated while the program is running (non pre-generated files).
+An endpoint serving the QR code using an external QR code generating API. The QR code can be scanned by the MATTR Showcase Wallet, causing a `Selective Disclosure` `Presentation` to appear in the wallet asking for credentials. In order for the verifier to request correct information, ensure that the credential details requested in the `Request Template` are present in your `Verifiable Credential`.
 
 
 ### Callback Endpoint
